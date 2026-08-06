@@ -1,13 +1,27 @@
-import "./globals.css";
- import { ThemeProvider } from "@/components/theme-provider";
 import { Analytics } from "@vercel/analytics/next";
-import Webpushr from "@/components/Webpushr";
-
+import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/sonner";
+import { CartProvider } from "@/providers/cart-provider";
+import "./globals.css";
 
 export const metadata = {
-  title: "تسويق رقمي    ",
+  title: "مخبز أم علي المميز - Waraq Al Ainab",
   description:
-    "لوحة تحكم ",
+    "منتجات مخبز أم علي المطبوخ الجاهز بجودة عالية مستوحى من الطبيعة والأطعمة الشرقية الأصيلة",
+  generator: "v0.app",
+  icons: {
+    icon: [
+      {
+        url: "/favicon-32x32.png",
+        media: "(prefers-color-scheme: light)",
+      },
+      {
+        url: "/favicon-32x32.png",
+        media: "(prefers-color-scheme: dark)",
+      },
+    ],
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({ children }) {
@@ -20,10 +34,8 @@ export default function RootLayout({ children }) {
           enableSystem
           disableTransitionOnChange
         >
-          <Webpushr></Webpushr>
-          {children}
-         
-         
+          <CartProvider>{children}</CartProvider>
+          <Toaster richColors position="top-center" />
         </ThemeProvider>
       </body>
     </html>

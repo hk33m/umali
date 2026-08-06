@@ -1,117 +1,140 @@
 "use client";
 
-import { Phone, Mail, MapPin, Instagram, Twitter } from "lucide-react";
-import { ScrollReveal } from "@/components/scroll-reveal";
-import Link from "next/link";
+import { motion } from "framer-motion";
+import { Facebook, Instagram, Twitter, Phone, Mail } from "lucide-react";
 
-export function Footer() {
+export default function Footer() {
+  const currentYear = new Date().getFullYear();
+
+  const socialLinks = [
+    { icon: Facebook, href: "#", label: "Facebook" },
+    { icon: Instagram, href: "#", label: "Instagram" },
+    { icon: Twitter, href: "#", label: "Twitter" },
+  ];
+
+  const footerLinks = [
+    {
+      title: "المنتجات",
+      links: ["جميع المنتجات", "المنتجات الجديدة", "العروض", "المتجر"],
+    },
+  ];
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.4 },
+    },
+  };
+
   return (
-    <footer className="dark:bg-foreground bg-primary text-background py-12 md:py-16">
-      <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-          <ScrollReveal direction="up" delay={0}>
-            <div>
-              <a href="#" className="flex items-center gap-2 mb-4 group">
-                <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
-                  <span className="text-primary-foreground font-bold text-lg">
-                    ف
+    <footer className="bg-foreground text-background">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Top Section */}
+        <div className="py-16 border-b border-background/10">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8"
+          >
+            {/* Brand Section */}
+            <motion.div variants={itemVariants} className="lg:col-span-2">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+                  <span className="text-background font-playfair font-bold">
+                    <img src="/logo.jpg" alt="Logo" className="rounded-full" />
                   </span>
                 </div>
-                <span className="font-bold text-lg">فرصة</span>
-              </a>
-              <p className="text-background/70 leading-relaxed">
-                حلول متكاملة لإدارة المشاريع من الفكرة إلى التنفيذ والتشغيل
-                الكامل
-              </p>
-            </div>
-          </ScrollReveal>
-
-          {/* <ScrollReveal direction="up" delay={100}>
-            <div>
-              <h3 className="font-bold text-lg mb-4">خدماتنا</h3>
-              <ul className="space-y-2 text-background/70">
-                {[
-                  { href: "#marketing", label: "التسويق الرقمي" },
-                  { href: "#trips", label: "تنظيم الرحلات" },
-                  { href: "#printing", label: "الطباعة والتجهيز" },
-                ].map((link) => (
-                  <li key={link.href}>
-                    <a
-                      href={link.href}
-                      className="hover:text-background transition-colors hover:translate-x-1 inline-block"
-                    >
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </ScrollReveal> */}
-
-          <ScrollReveal direction="up" delay={200}>
-            <div>
-              <h3 className="font-bold text-lg mb-4">روابط سريعة</h3>
-              <ul className="space-y-2 text-background/70">
-                {[
-                  { href: "#", label: "الرئيسية" },
-                  { href: "#services", label: "خدماتنا" },
-                  { href: "#contact", label: "تواصل معنا" },
-                ].map((link) => (
-                  <li key={link.href}>
-                    <a
-                      href={link.href}
-                      className="hover:text-background transition-colors hover:translate-x-1 inline-block"
-                    >
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal direction="up" delay={300}>
-            <div>
-              <h3 className="font-bold text-lg mb-4">تواصل معنا</h3>
-              <ul className="space-y-3 text-background/70">
-              <Link href="https://wa.me/966560694276">
-                <li className="flex items-center gap-2 group cursor-pointer hover:text-background transition-colors">
-                  <Phone className="w-4 h-4 group-hover:animate-pulse" />
-                  <span> 276 694 560 966+</span>
-                </li>
-                </Link>
-                <li className="flex items-center gap-2 group cursor-pointer hover:text-background transition-colors">
-                  <Mail className="w-4 h-4 group-hover:animate-pulse" />
-                  <span>forsastore@gmail.com</span>
-                </li>
-                <li className="flex items-center gap-2 group cursor-pointer hover:text-background transition-colors">
-                  <MapPin className="w-4 h-4 group-hover:animate-pulse" />
-                  <span>المملكة العربية السعودية - الرياض - جدة</span>
-                </li>
-              </ul>
-              <div className="flex gap-4 mt-4">
-                <a
-                  href="#"
-                  className="w-10 h-10 rounded-full bg-background/10 flex items-center justify-center hover:bg-primary hover:scale-110 transition-all duration-300"
-                >
-                  <Instagram className="w-5 h-5" />
-                </a>
-                <a
-                  href="#"
-                  className="w-10 h-10 rounded-full bg-background/10 flex items-center justify-center hover:bg-primary hover:scale-110 transition-all duration-300"
-                >
-                  <Twitter className="w-5 h-5" />
-                </a>
+                <span className="font-playfair font-bold text-xl">
+                  مخبز أم علي
+                </span>
               </div>
-            </div>
-          </ScrollReveal>
+              <p className="text-background/70 font-cairo text-sm leading-relaxed mb-4">
+                منتجات مخبز أم علي الفاخرة مصنوعة بأفضل المكونات الطبيعية
+                وتقاليد الطبخ الشرقي الأصيلة.
+              </p>
+              <div className="flex gap-4">
+                {socialLinks.map((social, index) => {
+                  const Icon = social.icon;
+                  return (
+                    <motion.a
+                      key={index}
+                      href={social.href}
+                      aria-label={social.label}
+                      whileHover={{ scale: 1.1 }}
+                      className="w-10 h-10 bg-background/10 hover:bg-primary rounded-full flex items-center justify-center transition-colors"
+                    >
+                      <Icon size={18} />
+                    </motion.a>
+                  );
+                })}
+              </div>
+            </motion.div>
+
+            {/* Links Columns */}
+            {footerLinks.map((column, columnIndex) => (
+              <motion.div key={columnIndex} variants={itemVariants}>
+                <h3 className="font-cairo font-semibold mb-4">
+                  {column.title}
+                </h3>
+                <ul className="space-y-2">
+                  {column.links.map((link, linkIndex) => (
+                    <li key={linkIndex}>
+                      <a
+                        href="#"
+                        className="text-background/70 hover:text-background transition-colors font-cairo text-sm"
+                      >
+                        {link}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
 
-        <ScrollReveal delay={400}>
-          <div className="pt-8 border-t border-background/10 text-center text-background/60">
-            <p>© {new Date().getFullYear()} فرصة. جميع الحقوق محفوظة.</p>
+        {/* Bottom Section */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="py-8 flex flex-col md:flex-row justify-between items-center gap-4"
+        >
+          <p className="text-background/70 font-cairo text-sm">
+            © {currentYear} مخبز أم علي. جميع الحقوق محفوظة.
+          </p>
+          <div className="flex gap-6">
+            <a
+              href="mailto:umalibakery26@gmail.com"
+              className="flex items-center gap-2 text-background/70 hover:text-background transition-colors font-cairo text-sm"
+            >
+              <Mail size={16} />
+              البريد الإلكتروني
+            </a>
+            <a
+              href="tel:+966123456789"
+              className="flex items-center gap-2 text-background/70 hover:text-background transition-colors font-cairo text-sm"
+            >
+              <Phone size={16} />
+              الهاتف
+            </a>
           </div>
-        </ScrollReveal>
+        </motion.div>
       </div>
     </footer>
   );

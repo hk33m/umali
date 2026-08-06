@@ -1,28 +1,33 @@
- import { Header } from "@/components/header"
-import { HeroSection } from "@/components/hero-section"
-import { ServicesSection } from "@/components/services-section"
-import { MarketingSection } from "@/components/marketing-section"
-import { TripsSection } from "@/components/trips-section"
-import { PrintingSection } from "@/components/printing-section"
-import { WhyUsSection } from "@/components/why-us-section"
-import { CtaSection } from "@/components/cta-section"
-import {ClientsSection} from "@/components/clisection"
-import { Footer } from "@/components/footer"
+'use client';
+
+import { useState } from 'react';
+import Header from '@/components/header'
+import Hero from '@/components/hero'
+import Products from '@/components/products'
+import Features from '@/components/features'
+import Reviews from '@/components/reviews'
+import Contact from '@/components/contact'
+import Footer from '@/components/footer'
+// import HeroAnimation from "@/components/HeroAnimation";
+import BannerSlider from '@/components/bannerSlider'
+import Offers from '@/components/offers';
 
 export default function Home() {
+  
+
   return (
-    <main className="min-h-screen bg-background">
-     
-      <Header />
-      <HeroSection />
-      <ServicesSection />
-      <MarketingSection />
-      {/* <TripsSection /> */}
-      {/* <PrintingSection /> */}
-      <WhyUsSection />
-      <ClientsSection />
-      <CtaSection />
+    <main className="min-h-screen bg-background overflow-auto ">
+      <Header onCartClick={() => setIsCartOpen(true)} />
+        {/* <HeroAnimation /> */}
+      <Hero />
+      <BannerSlider/>
+      <Products />
+      <Offers />
+      <Features />
+      <Reviews />
+      <Contact />
       <Footer />
+      
     </main>
   )
 }

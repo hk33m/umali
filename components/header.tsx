@@ -1,142 +1,134 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { useTheme } from "next-themes";
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-  SheetHeader,
-  SheetTitle,
-} from "@/components/ui/sheet";
-import { Menu, Phone ,MessageCircle, Moon, Sun} from "lucide-react";
-import { cn } from "@/lib/utils";
-import Link from "next/link";
+import { Menu, X, ShoppingCart } from "lucide-react";
+import { useCartStore } from "@/stores/cartStore";
+import Link from 'next/link';
 
-export function Header() {
+export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const { setTheme, theme } = useTheme();
+  const cartItems = useCartStore((state) => state.cartItems);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const cartCount = cartItems.length;
 
   const navItems = [
-    { label: "الرئيسية", href: "#" },
-    { label: "خدماتنا", href: "#services" },
-    { label: "التسويق", href: "#marketing" },
-     { label: "عملائنا", href: "#clisection" },
-    // { label: "الطباعة", href: "#printing" },
-    { label: "تواصل معنا", href: "#contact" },
+    { name: "الرئيسية", href: "/" },
+    { name: "المنتجات", href: "/products" },
+    { name: "المميزات", href: "/#features" },
+    { name: "الآراء", href: "/#reviews" },
+    { name: "اتصل بنا", href: "/#contact" },
   ];
 
   return (
-    <header
-      className={cn(
-        "fixed top-0 right-0 left-0 z-50 transition-all duration-300",
-        isScrolled
-          ? "bg-background/95 backdrop-blur-md border-b border-border shadow-sm"
-          : "bg-transparent"
-      )}
-    >
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16 md:h-20">
-          <a href="#" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
-              <span className="text-primary-foreground font-bold text-lg">
-                ف
+    <header className="fixed top-0 w-full bg-background/30 backdrop-blur-md z-50 border-b border-border">
+      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-20">
+          {/* Logo */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className="flex-shrink-0"
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center">
+                <span className="text-white font-playfair font-bold text-lg">
+                  <img src="/logo.jpg" alt="Logo" className="rounded-full" />
+                </span>
+              </div>
+              <span className="font-playfair font-bold text-xl text-foreground hidden sm:inline">
+                مخبز أم علي
               </span>
             </div>
-            <span className="font-bold text-lg text-foreground">فرصة</span>
-          </a>
+          </motion.div>
 
-          <nav className="hidden lg:flex items-center gap-8">
-            {navItems.map((item) => (
-              <a
-                key={item.label}
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-8">
+            {navItems.map((item, index) => (
+              <motion.a
+                key={item.name}
                 href={item.href}
-                className="relative text-muted-foreground hover:text-primary transition-colors font-medium group"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="text-foreground hover:text-primary transition-colors font-cairo text-sm"
               >
-                {item.label}
-                <span className="absolute -bottom-1 right-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
-              </a>
+                {item.name}
+              </motion.a>
             ))}
-          </nav>
-          
-       
-          
-          <div className="hidden lg:flex items-center gap-4">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="border sm:flex relative cursor-pointer"
-            >
-              <Moon className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-              <Sun className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-            
-              <span className="sr-only">تبديل المظهر</span>
-            </Button>
-            <Link href="https://wa.me/966560694276">
-            <Button className="bg-primary hover:bg-primary/90 text-primary-foreground gap-2 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/25">
-              <MessageCircle className="w-4 h-4" />
-              تواصل الآن
-            </Button>
-            </Link>
           </div>
-      
-    
-            
-         <div className=" flex gap-1.5">
-          <Sheet open={isOpen} onOpenChange={setIsOpen}>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="border sm:flex relative lg:hidden cursor-pointer"
+
+          {/* Action Buttons */}
+          <div className="flex items-center gap-4">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
             >
-              <Moon className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-              <Sun className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-            
-              <span className="sr-only">تبديل المظهر</span>
-            </Button>
-            {/* <SheetHeader>
-              <SheetTitle className="sr-only">Menu</SheetTitle>
-            </SheetHeader> */}
-            <SheetTrigger asChild className="lg:hidden border">
-              <Button variant="ghost" size="icon">
-                <Menu className="w-6 h-6" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right" className="w-80">
-              <nav className="flex flex-col gap-4 mt-8">
-                {navItems.map((item, index) => (
-                  <a
-                    key={item.label}
-                    href={item.href}
-                    className="text-foreground hover:text-primary transition-colors font-medium py-3 border-b border-border animate-in slide-in-from-right duration-300"
-                    style={{ animationDelay: `${index * 50}ms` }}
-                    onClick={() => setIsOpen(false)}
+              <Link href="/cart">
+              <button
+                className="relative p-2 text-foreground hover:text-primary transition-colors cursor-pointer"
+              >
+                <ShoppingCart className="w-6 h-6" />
+                {cartCount > 0 && (
+                  <motion.span
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    className="absolute -top-1 -right-1 bg-accent text-accent-foreground text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center"
                   >
-                    {item.label}
-                  </a>
-                ))}
-                <Button className="bg-primary hover:bg-primary/90 text-primary-foreground gap-2 mt-4">
-                  <Phone className="w-4 h-4" />
-                  تواصل الآن
-                </Button>
-              </nav>
-            </SheetContent>
-          </Sheet>
-       </div>
+                    {cartCount}
+                  </motion.span>
+                )}
+              </button>
+              </Link>
+            </motion.div>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="md:hidden text-foreground hover:text-primary transition-colors"
+            >
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
-      </div>
+
+        {/* Mobile Navigation */}
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden border-t border-border bg-card mb-6"
+          >
+            <div className="px-4 py-4 space-y-3">
+              {navItems.map((item) => (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  onClick={() => setIsOpen(false)}
+                  className="block text-foreground hover:text-primary transition-colors font-cairo py-2"
+                >
+                  {item.name}
+                </a>
+              ))}
+                   
+              {/* <Button
+                onClick={() => {
+                  setIsOpen(false);
+                }}
+                className="w-full bg-primary hover:bg-primary/90 text-white font-cairo mt-4"
+              >
+                <ShoppingCart className="w-4 h-4 ml-2" />
+                السلة ({cartCount})
+              </Button> */}
+         
+            </div>
+          </motion.div>
+        )}
+      </nav>
     </header>
   );
 }
