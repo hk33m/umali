@@ -110,23 +110,7 @@ export default function Features() {
         </motion.div>
 
         {/* Highlight Box */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          viewport={{ once: true }}
-          className="mt-16 bg-gradient-to-r from-primary/5 to-accent/5 border border-primary/20 rounded-3xl p-8 md:p-12 text-center"
-        >
-          <h3 className="font-playfair font-bold text-2xl text-foreground mb-4">
-            🎁 عرض خاص
-          </h3>
-          <p className="text-muted-foreground font-cairo text-lg mb-6">
-            احصل على خصم 20% على أول طلب لك اليوم
-          </p>
-          <code className="inline-block bg-background px-6 py-3 rounded-lg text-primary font-bold font-mono text-lg">
-            WELCOME20
-          </code>
-        </motion.div>
+        
       </div>
     </section>
   );

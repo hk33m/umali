@@ -1,53 +1,53 @@
-'use client'
+"use client";
 
-import { motion } from 'framer-motion'
-import { Star, Quote } from 'lucide-react'
+import { motion } from "framer-motion";
+import { Star, Quote } from "lucide-react";
 
 export default function Reviews() {
   const reviews = [
-  {
-    name: 'أحمد العريقي',
-    role: 'موظف',
-    content: 'المخبوزات طازجة والطعم ممتاز.',
-    rating: 5,
-    avatar: '👨',
-  },
-  {
-    name: 'أم خالد',
-    role: 'ربة منزل',
-    content: 'الفطائر لذيذة والأسعار مناسبة.',
-    rating: 5,
-    avatar: '👩',
-  },
-  {
-    name: 'محمد الآنسي',
-    role: 'طالب',
-    content: 'أطلب منهم باستمرار والجودة ثابتة.',
-    rating: 4.5,
-    avatar: '🧑',
-  },
-  {
-    name: 'سارة الحميري',
-    role: 'معلمة',
-    content: 'التوصيل سريع والخبز طازج.',
-    rating: 5,
-    avatar: '👩‍🏫',
-  },
-  {
-    name: 'عبدالله محمد',
-    role: 'صاحب متجر',
-    content: 'تعامل ممتاز ومنتجات نظيفة.',
-    rating: 4.8,
-    avatar: '👨‍💼',
-  },
-  {
-    name: 'هدى الشعيبي',
-    role: 'موظفة',
-    content: 'الحلويات لذيذة وأنصح بتجربتها.',
-    rating: 5,
-    avatar: '👩',
-  },
-];
+    {
+      name: "أحمد العريقي",
+      role: "موظف",
+      content: "المخبوزات طازجة والطعم ممتاز.",
+      rating: 5,
+      avatar: "👨",
+    },
+    {
+      name: "أم خالد",
+      role: "ربة منزل",
+      content: "الفطائر لذيذة والأسعار مناسبة.",
+      rating: 5,
+      avatar: "👩",
+    },
+    {
+      name: "محمد الآنسي",
+      role: "طالب",
+      content: "أطلب منهم باستمرار والجودة ثابتة.",
+      rating: 4.5,
+      avatar: "🧑",
+    },
+    {
+      name: "سارة الحميري",
+      role: "معلمة",
+      content: "التوصيل سريع والخبز طازج.",
+      rating: 5,
+      avatar: "👩‍🏫",
+    },
+    {
+      name: "عبدالله محمد",
+      role: "صاحب متجر",
+      content: "تعامل ممتاز ومنتجات نظيفة.",
+      rating: 4.8,
+      avatar: "👨‍💼",
+    },
+    {
+      name: "هدى الشعيبي",
+      role: "موظفة",
+      content: "الحلويات لذيذة وأنصح بتجربتها.",
+      rating: 5,
+      avatar: "👩",
+    },
+  ];
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -57,7 +57,7 @@ export default function Reviews() {
         staggerChildren: 0.1,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -66,7 +66,7 @@ export default function Reviews() {
       y: 0,
       transition: { duration: 0.6 },
     },
-  }
+  };
 
   return (
     <section id="reviews" className="py-20 bg-background">
@@ -79,7 +79,9 @@ export default function Reviews() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <p className="text-primary font-cairo font-semibold text-lg mb-3">⭐ آراء عملائنا</p>
+          <p className="text-primary font-cairo font-semibold text-lg mb-3">
+            ⭐ آراء عملائنا
+          </p>
           <h2 className="font-playfair font-bold text-4xl md:text-5xl text-foreground mb-4">
             يثق بنا آلاف العملاء
           </h2>
@@ -104,7 +106,10 @@ export default function Reviews() {
               className="bg-card rounded-2xl p-6 border border-border hover:border-primary transition-all duration-300 relative"
             >
               {/* Quote Icon */}
-              <Quote className="absolute top-4 right-4 text-primary/20 opacity-50" size={32} />
+              <Quote
+                className="absolute top-4 right-4 text-primary/20 opacity-50"
+                size={32}
+              />
 
               {/* Rating */}
               <div className="flex gap-1 mb-4">
@@ -112,7 +117,11 @@ export default function Reviews() {
                   <Star
                     key={i}
                     size={16}
-                    className={i < Math.floor(review.rating) ? 'fill-accent text-accent' : 'text-muted'}
+                    className={
+                      i < Math.floor(review.rating)
+                        ? "fill-accent text-accent"
+                        : "text-muted"
+                    }
                   />
                 ))}
               </div>
@@ -151,8 +160,12 @@ export default function Reviews() {
               <span className="text-2xl">✓</span>
             </div>
             <div>
-              <p className="font-cairo font-semibold text-foreground">10K+ عميل</p>
-              <p className="text-xs text-muted-foreground font-cairo">راضون تماماً</p>
+              <p className="font-cairo font-semibold text-foreground">
+                2k+ عميل
+              </p>
+              <p className="text-xs text-muted-foreground font-cairo">
+                راضون تماماً
+              </p>
             </div>
           </div>
           <div className="flex items-center gap-3">
@@ -160,8 +173,12 @@ export default function Reviews() {
               <span className="text-2xl">🏆</span>
             </div>
             <div>
-              <p className="font-cairo font-semibold text-foreground">تقييم 4.9★</p>
-              <p className="text-xs text-muted-foreground font-cairo">من أصل 5</p>
+              <p className="font-cairo font-semibold text-foreground">
+                تقييم 4.9★
+              </p>
+              <p className="text-xs text-muted-foreground font-cairo">
+                من أصل 5
+              </p>
             </div>
           </div>
           <div className="flex items-center gap-3">
@@ -169,12 +186,16 @@ export default function Reviews() {
               <span className="text-2xl">🚚</span>
             </div>
             <div>
-              <p className="font-cairo font-semibold text-foreground">توصيل سريع</p>
-              <p className="text-xs text-muted-foreground font-cairo">في كل الدول</p>
+              <p className="font-cairo font-semibold text-foreground">
+                توصيل سريع
+              </p>
+              <p className="text-xs text-muted-foreground font-cairo">
+                الى اي مكان في إب
+              </p>
             </div>
           </div>
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

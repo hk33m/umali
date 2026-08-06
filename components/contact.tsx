@@ -42,14 +42,14 @@ export default function Contact() {
     {
       icon: FaWhatsapp,
       title: "وتساب",
-      content: "+967772610256",
+      content: "967772610256+",
       color: "bg-primary/10",
       url: "https://wa.me/967772610256",
     },
     {
       icon: Phone,
       title: "الهاتف",
-      content: "+967772610256",
+      content: "967772610256+",
       color: "bg-primary/10",
       url: "tel:+967772610256",
     },
@@ -189,7 +189,7 @@ export default function Contact() {
                     onChange={handleChange}
                     required
                     className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all font-cairo"
-                    placeholder="+966-50-1234567"
+                    placeholder="+967-50-1234567"
                   />
                 </div>
               </div>

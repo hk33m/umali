@@ -55,7 +55,7 @@ export default function Hero() {
               className="text-primary font-cairo text-lg font-semibold"
             >
               ✨ طازجة تُخبز بحب كل يوم
-                          </motion.p>
+            </motion.p>
 
             <motion.h1
               variants={itemVariants}
@@ -63,14 +63,16 @@ export default function Hero() {
             >
               مخبز أم علي المميز
               <br />
-              <span className="text-primary">  طراوة مثالية وطعم أصيل</span>
+              <span className="text-primary"> طراوة مثالية وطعم أصيل</span>
             </motion.h1>
 
             <motion.p
               variants={itemVariants}
               className="text-lg text-muted-foreground font-cairo leading-relaxed"
             >
-             أرغفة خبز أم علي تُحضر يومياً من أجود أنواع الدقيق والمكونات الطبيعية لتضمن لك خبزاً خفيفاً وطرياً. الخيار الأمثل ليرافق جميع وجباتك على المائدة.
+              أرغفة خبز أم علي تُحضر يومياً من أجود أنواع الدقيق والمكونات
+              الطبيعية لتضمن لك خبزاً خفيفاً وطرياً. الخيار الأمثل ليرافق جميع
+              وجباتك على المائدة.
             </motion.p>
 
             <motion.div
@@ -97,7 +99,7 @@ export default function Hero() {
             <motion.div variants={itemVariants} className="flex gap-8 pt-4">
               <div>
                 <p className="text-2xl font-bold text-primary2 font-playfair">
-                  10K+
+                  2k+
                 </p>
                 <p className="text-sm text-muted-foreground font-cairo">
                   عميل راضٍ

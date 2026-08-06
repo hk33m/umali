@@ -16,7 +16,7 @@ export default function CheckoutPage() {
     0,
   );
   const clearCart = useCartStore((state) => state.clearCart);
-  
+
   // تم إزالة واجهة TypeScript والاعتماد على كائن JS عادي
   const [formData, setFormData] = useState({
     customer_name: "",
@@ -24,7 +24,7 @@ export default function CheckoutPage() {
     address: "",
     notes: "",
   });
-  
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [orderReceipt, setOrderReceipt] = useState(null);
 
@@ -114,7 +114,10 @@ export default function CheckoutPage() {
     document.body.appendChild(element);
 
     try {
-      const canvas = await html2canvas(element, { scale: 2, backgroundColor: "#ffffff" });
+      const canvas = await html2canvas(element, {
+        scale: 2,
+        backgroundColor: "#ffffff",
+      });
       document.body.removeChild(element);
       return canvas.toDataURL("image/jpeg", 0.95);
     } catch (error) {
@@ -142,7 +145,8 @@ export default function CheckoutPage() {
       message += `\nملاحظات: ${formData.notes}\n`;
     }
 
-    const whatsappPhone = process.env.NEXT_PUBLIC_WHATSAPP_PHONE || "967775591565";
+    const whatsappPhone =
+      process.env.NEXT_PUBLIC_WHATSAPP_PHONE || "967772610256";
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/${whatsappPhone}?text=${encodedMessage}`;
 
@@ -160,20 +164,23 @@ export default function CheckoutPage() {
         address: formData.address,
         notes: formData.notes,
         total: totalPrice,
-        items: cartItems.map(item => ({
+        items: cartItems.map((item) => ({
           product_id: item.id,
           product_name: item.name,
           product_price: item.price,
           quantity: item.quantity,
-          total: item.price * item.quantity
-        }))
+          total: item.price * item.quantity,
+        })),
       };
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/orders`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(orderPayload),
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/orders`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(orderPayload),
+        },
+      );
 
       if (!response.ok) throw new Error("فشل في حفظ الطلب في قاعدة البيانات");
 
@@ -192,12 +199,24 @@ export default function CheckoutPage() {
 
   if (totalPrice === 0 && !orderReceipt) {
     return (
-      <div className="min-h-screen flex items-center justify-center px-4" dir="rtl">
+      <div
+        className="min-h-screen flex items-center justify-center px-4"
+        dir="rtl"
+      >
         <div className="text-center py-12">
-          <h1 className="text-3xl font-bold mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>سلتك فارغة</h1>
-          <p className="text-muted-foreground mb-8">لا توجد منتجات في سلتك لإتمام شرائها</p>
+          <h1
+            className="text-3xl font-bold mb-4"
+            style={{ fontFamily: "'Playfair Display', serif" }}
+          >
+            سلتك فارغة
+          </h1>
+          <p className="text-muted-foreground mb-8">
+            لا توجد منتجات في سلتك لإتمام شرائها
+          </p>
           <Link href="/">
-            <Button className="bg-primary hover:bg-primary/90 text-white">العودة للمتجر</Button>
+            <Button className="bg-primary hover:bg-primary/90 text-white">
+              العودة للمتجر
+            </Button>
           </Link>
         </div>
       </div>
@@ -206,14 +225,24 @@ export default function CheckoutPage() {
 
   if (orderReceipt) {
     return (
-      <div className="min-h-screen py-20 px-4" style={{ fontFamily: "'Cairo', sans-serif" }} dir="rtl">
+      <div
+        className="min-h-screen py-20 px-4"
+        style={{ fontFamily: "'Cairo', sans-serif" }}
+        dir="rtl"
+      >
         <div className="max-w-4xl mx-auto text-center">
           <div className="text-6xl mb-6">✅</div>
           <h1 className="text-4xl font-bold mb-4">تم تسجيل طلبك بنجاح!</h1>
-          <p className="text-xl text-muted-foreground mb-8">يرجى تحميل الفاتورة وإرسالها لنا في الواتساب لتأكيد الطلب</p>
-          
-          <img src={orderReceipt} alt="Order Receipt" className="w-full max-w-md mx-auto rounded-lg shadow-lg mb-8" />
-          
+          <p className="text-xl text-muted-foreground mb-8">
+            يرجى تحميل الفاتورة وإرسالها لنا في الواتساب لتأكيد الطلب
+          </p>
+
+          <img
+            src={orderReceipt}
+            alt="Order Receipt"
+            className="w-full max-w-md mx-auto rounded-lg shadow-lg mb-8"
+          />
+
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Button
               onClick={() => {
@@ -238,19 +267,30 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="min-h-screen pt-24 pb-12 px-4" style={{ fontFamily: "'Cairo', sans-serif" }} dir="rtl">
+    <div
+      className="min-h-screen pt-24 pb-12 px-4"
+      style={{ fontFamily: "'Cairo', sans-serif" }}
+      dir="rtl"
+    >
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-4xl font-bold mb-12 text-center" style={{ fontFamily: "'Playfair Display', serif" }}>
+        <h1
+          className="text-4xl font-bold mb-12 text-center"
+          style={{ fontFamily: "'Playfair Display', serif" }}
+        >
           إتمام الشراء
         </h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
-            <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-lg p-8 space-y-6">
-              
+            <form
+              onSubmit={handleSubmit}
+              className="bg-white rounded-2xl shadow-lg p-8 space-y-6"
+            >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-bold mb-2">الاسم الكامل</label>
+                  <label className="block text-sm font-bold mb-2">
+                    الاسم الكامل
+                  </label>
                   <input
                     type="text"
                     name="customer_name"
@@ -262,7 +302,9 @@ export default function CheckoutPage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-bold mb-2">رقم الهاتف (واتساب)</label>
+                  <label className="block text-sm font-bold mb-2">
+                    رقم الهاتف (واتساب)
+                  </label>
                   <input
                     type="tel"
                     name="phone"
@@ -277,7 +319,9 @@ export default function CheckoutPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-bold mb-2">العنوان والمدينة بالتفصيل</label>
+                <label className="block text-sm font-bold mb-2">
+                  العنوان والمدينة بالتفصيل
+                </label>
                 <input
                   type="text"
                   name="address"
@@ -290,7 +334,9 @@ export default function CheckoutPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-bold mb-2">ملاحظات إضافية (اختياري)</label>
+                <label className="block text-sm font-bold mb-2">
+                  ملاحظات إضافية (اختياري)
+                </label>
                 <textarea
                   name="notes"
                   value={formData.notes}
@@ -313,20 +359,36 @@ export default function CheckoutPage() {
 
           <div>
             <div className="bg-white rounded-2xl shadow-lg p-8 sticky top-24 border border-gray-100">
-              <h2 className="text-2xl font-bold mb-6 text-gray-900" style={{ fontFamily: "'Playfair Display', serif" }}>
+              <h2
+                className="text-2xl font-bold mb-6 text-gray-900"
+                style={{ fontFamily: "'Playfair Display', serif" }}
+              >
                 ملخص الطلب
               </h2>
 
               <div className="space-y-4 mb-6 max-h-96 overflow-y-auto pl-2">
                 {cartItems.map((item) => (
-                  <div key={item.id} className="flex gap-4 pb-4 border-b border-gray-100">
+                  <div
+                    key={item.id}
+                    className="flex gap-4 pb-4 border-b border-gray-100"
+                  >
                     <div className="relative w-20 h-20 rounded-xl overflow-hidden bg-gray-100 flex-shrink-0">
-                      <img src={`${process.env.NEXT_PUBLIC_IMAGE_URL || ''}uploads/products/${item.image}`} alt={item.name}  className="object-cover" />
+                      <img
+                        src={`${process.env.NEXT_PUBLIC_IMAGE_URL || ""}uploads/products/${item.image}`}
+                        alt={item.name}
+                        className="object-cover"
+                      />
                     </div>
                     <div className="flex-1 flex flex-col justify-center">
-                      <h3 className="font-bold text-sm text-gray-900 line-clamp-2 mb-1">{item.name}</h3>
-                      <p className="text-xs text-gray-500 mb-2">الكمية: {item.quantity}</p>
-                      <p className="font-black text-primary">{item.price * item.quantity} ريال</p>
+                      <h3 className="font-bold text-sm text-gray-900 line-clamp-2 mb-1">
+                        {item.name}
+                      </h3>
+                      <p className="text-xs text-gray-500 mb-2">
+                        الكمية: {item.quantity}
+                      </p>
+                      <p className="font-black text-primary">
+                        {item.price * item.quantity} ريال
+                      </p>
                     </div>
                   </div>
                 ))}
@@ -335,7 +397,9 @@ export default function CheckoutPage() {
               <div className="bg-gray-50 p-4 rounded-xl space-y-3">
                 <div className="flex justify-between text-sm text-gray-600">
                   <span>المجموع الفرعي:</span>
-                  <span className="font-bold text-gray-900">{totalPrice} ريال</span>
+                  <span className="font-bold text-gray-900">
+                    {totalPrice} ريال
+                  </span>
                 </div>
                 <div className="border-t border-gray-200 pt-3 flex justify-between text-lg font-black text-gray-900">
                   <span>الإجمالي النهائي:</span>
