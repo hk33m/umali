@@ -58,11 +58,11 @@ export default function Footer() {
                     <img src="/logo.jpg" alt="Logo" className="rounded-full" />
                   </span>
                 </div>
-                <span className="font-playfair font-bold text-xl">
+                <span className="font-playfair font-bold text-base md:text-lg ">
                   مخبز أم علي
                 </span>
               </div>
-              <p className="text-background/70 font-cairo text-sm leading-relaxed mb-4">
+              <p className="text-background/70 font-cairo text-sm md:text-base leading-relaxed mb-4">
                 منتجات مخبز أم علي الفاخرة مصنوعة بأفضل المكونات الطبيعية
                 وتقاليد الطبخ الشرقي الأصيلة.
               </p>

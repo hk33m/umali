@@ -54,10 +54,10 @@ export default function Offers() {
           <Sparkles size={16} />
           <span>عروض لفترة محدودة</span>
         </div>
-        <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">
+        <h1 className="text-2xl md:text-4xl font-extrabold text-slate-900 mb-4">
           عروض مخبز أم علي الحصرية
         </h1>
-        <p className="text-slate-600 text-base">
+        <p className="text-slate-600 text-sm md:text-base">
           استمتع بألذ المعجنات والكيك الطازج بأفضل الأسعار. لا تفوت عروضنا المتميزة المصممة خصيصاً لك.
         </p>
       </div>

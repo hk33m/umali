@@ -98,16 +98,18 @@ export default function Products() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-6"
+          className="text-center mb-2"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">منتجاتنا المميزة</h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+          <h2 className="text-2xl md:text-4xl font-bold mb-2">منتجاتنا المميزة</h2>
+          <p className="text-muted-foreground text-sm md:text-base max-w-2xl mx-auto mb-2">
             تشكيلة فاخرة من مخبز أم علي المطبوخ بأفضل الوصفات الشرقية الأصيلة
           </p>
-          <div className="text-left text-primary flex justify-end gap-1 " > 
+          <div className="text-left text-primary flex justify-end text-sm  " > 
             <Link href={"/products"}
-             >تصفح جميع المنتجات </Link>
-             <ArrowLeftFromLine></ArrowLeftFromLine>
+            className="flex px-2 py-4 rounded-lg border "
+             >تصفح جميع المنتجات 
+             <ArrowLeftFromLine className="w-4 h-4" />
+             </Link>
           </div>
         </motion.div>
 
@@ -155,10 +157,10 @@ export default function Products() {
                       </span>
                     </div>
 
-                    <h3 className="text-2xl font-bold text-foreground mb-2">
+                    <h3 className="text-base md:text-lg font-bold text-foreground mb-2">
                       {product.name}
                     </h3>
-                    <p className="text-gray-600 text-sm mb-4 flex-grow">
+                    <p className="text-gray-600 text-sm md:text-base mb-4 flex-grow">
                       {product.description}
                     </p>
 
@@ -176,7 +178,7 @@ export default function Products() {
                       </span>
                     </div>
 
-                    <div className="text-3xl font-bold text-primary mb-6">
+                    <div className="text-lg md:text-xl font-bold text-primary mb-6">
                       {product.price} ريال
                     </div>
 

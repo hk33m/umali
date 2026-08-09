@@ -52,14 +52,14 @@ export default function Hero() {
           >
             <motion.p
               variants={itemVariants}
-              className="text-primary font-cairo text-lg font-semibold"
+              className="text-primary font-cairo text-sm md:text-base font-semibold"
             >
               ✨ طازجة تُخبز بحب كل يوم
             </motion.p>
 
             <motion.h1
               variants={itemVariants}
-              className="font-playfair font-bold text-5xl md:text-6xl text-foreground leading-tight"
+              className="font-playfair font-bold text-2xl md:text-4xl text-foreground leading-tight"
             >
               مخبز أم علي المميز
               <br />
@@ -68,7 +68,7 @@ export default function Hero() {
 
             <motion.p
               variants={itemVariants}
-              className="text-lg text-muted-foreground font-cairo leading-relaxed"
+              className="text-sm md:text-base text-muted-foreground font-cairo leading-relaxed"
             >
               أرغفة خبز أم علي تُحضر يومياً من أجود أنواع الدقيق والمكونات
               الطبيعية لتضمن لك خبزاً خفيفاً وطرياً. الخيار الأمثل ليرافق جميع
@@ -98,7 +98,7 @@ export default function Hero() {
             {/* Stats */}
             <motion.div variants={itemVariants} className="flex gap-8 pt-4">
               <div>
-                <p className="text-2xl font-bold text-primary2 font-playfair">
+                <p className="text-xl md:text-2xl font-bold text-primary2 font-playfair">
                   2k+
                 </p>
                 <p className="text-sm text-muted-foreground font-cairo">
@@ -106,7 +106,7 @@ export default function Hero() {
                 </p>
               </div>
               <div>
-                <p className="text-2xl font-bold text-primary2 font-playfair">
+                <p className="text-xl md:text-2xl font-bold text-primary2 font-playfair">
                   5★
                 </p>
                 <p className="text-sm text-muted-foreground font-cairo">
@@ -114,7 +114,7 @@ export default function Hero() {
                 </p>
               </div>
               <div>
-                <p className="text-2xl font-bold text-primary2 font-playfair">
+                <p className="text-xl md:text-2xl font-bold text-primary2 font-playfair">
                   100%
                 </p>
                 <p className="text-sm text-muted-foreground font-cairo">

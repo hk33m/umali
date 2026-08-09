@@ -80,13 +80,13 @@ export default function Contact() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <p className="text-primary font-cairo font-semibold text-lg mb-3">
+          <p className="text-primary font-cairo font-semibold text-sm mb-3">
             📞 تواصل معنا
           </p>
-          <h2 className="font-playfair font-bold text-4xl md:text-5xl text-foreground mb-4">
+          <h2 className="font-playfair font-bold text-2xl md:text-4xl text-foreground mb-4">
             نحن هنا لخدمتك
           </h2>
-          <p className="text-muted-foreground font-cairo max-w-2xl mx-auto">
+          <p className="text-muted-foreground font-cairo max-w-2xl mx-auto text-sm md:text-base">
             اتصل بنا أو أرسل لنا رسالة وسيرد عليك فريقنا في أقرب وقت ممكن
           </p>
         </motion.div>
@@ -110,15 +110,15 @@ export default function Contact() {
                 >
                   <Link href={info.url} className="flex gap-4">
                   <div
-                    className={`${info.color} w-16 h-16 rounded-xl flex items-center justify-center flex-shrink-0`}
+                    className={`${info.color} w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0`}
                   >
-                    <Icon className="text-primary" size={24} />
+                    <Icon className="text-primary w-7 h-7 md:w-8 md:h-8" />
                   </div>
                   <div>
-                    <h3 className="font-playfair font-bold text-lg text-foreground mb-1">
+                    <h3 className="font-playfair font-bold text-base md:text-lg text-foreground mb-1">
                       {info.title}
                     </h3>
-                    <p className="text-muted-foreground font-cairo">
+                    <p className="text-muted-foreground font-cairo text-sm md:text-base">
                       {info.content}
                     </p>
                   </div>
@@ -149,7 +149,7 @@ export default function Contact() {
           >
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block font-cairo text-foreground font-semibold mb-2">
+                <label className="block font-cairo text-foreground font-semibold mb-2 text-sm md:text-base">
                   الاسم الكامل
                 </label>
                 <input
@@ -165,7 +165,7 @@ export default function Contact() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block font-cairo text-foreground font-semibold mb-2">
+                  <label className="block font-cairo text-foreground font-semibold mb-2 text-sm md:text-base">
                     البريد الإلكتروني
                   </label>
                   <input
@@ -179,7 +179,7 @@ export default function Contact() {
                   />
                 </div>
                 <div>
-                  <label className="block font-cairo text-foreground font-semibold mb-2">
+                  <label className="block font-cairo text-foreground font-semibold mb-2 text-sm md:text-base">
                     رقم الهاتف
                   </label>
                   <input
@@ -195,7 +195,7 @@ export default function Contact() {
               </div>
 
               <div>
-                <label className="block font-cairo text-foreground font-semibold mb-2">
+                <label className="block font-cairo text-foreground font-semibold mb-2 text-sm md:text-base">
                   الرسالة
                 </label>
                 <textarea

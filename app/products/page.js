@@ -134,10 +134,10 @@ const containerVariants = {
             
             {/* قسم الترويسة (Hero Section) */}
             <div className="bg-orange-50 py-12 px-4 text-center border-b border-orange-100">
-                <h1 className="text-4xl md:text-5xl font-black text-gray-800 mb-4">
+                <h1 className="text-2xl md:text-4xl font-black text-gray-800 mb-4">
                     قائمة <span className="text-orange-500">مخبز أم علي</span>
                 </h1>
-                <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+                <p className="text-gray-600 text-sm md:text-base max-w-2xl mx-auto">
                     تصفح أشهى المنتجات المصنوعة بحب وعناية. اختر ما يناسب ذوقك وأضفه إلى سلتك مباشرة.
                 </p>
             </div>
@@ -217,14 +217,14 @@ const containerVariants = {
                                             <div className="p-6 flex flex-col flex-grow">
                                               <div className="mb-3">
                                                 <span className="text-xs font-semibold text-primary uppercase tracking-widest">
-                                                  {product.product_type}
+                                                  {product.product_type || "صنف مميز"}
                                                 </span>
                                               </div>
                             
-                                              <h3 className="text-2xl font-bold text-foreground mb-2">
+                                              <h3 className="text-base md:text-lg font-bold text-foreground mb-2">
                                                 {product.name}
                                               </h3>
-                                              <p className="text-gray-600 text-sm mb-4 flex-grow">
+                                              <p className="text-gray-60 text-sm md:text-base mb-4 flex-grow">
                                                 {product.description}
                                               </p>
                             
@@ -241,7 +241,7 @@ const containerVariants = {
                                                 </span>
                                               </div>
                             
-                                              <div className="text-3xl font-bold text-primary mb-6">
+                                              <div className="text-lg md:text-xl font-bold text-primary mb-6">
                                                 {product.price} ريال
                                               </div>
                             

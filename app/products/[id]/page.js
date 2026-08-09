@@ -113,12 +113,12 @@ export default function ProductDetails() {
             {/* شارة توفر المنتج (اختيارية، تضيف لمسة احترافية) */}
             {product.is_available === 1 && (
               <div className="flex justify-between items-center ">
-              <span className="inline-block bg-green-100 text-green-700 text-sm font-bold px-3 py-1 rounded-full  w-max">
+              <span className="inline-block bg-green-100 text-green-700 text-xs md:text-sm font-bold px-3 py-1 rounded-full  w-max">
                 متوفر في المتجر
               </span>
         <button
       onClick={() => router.back()}
-      className="flex items-center gap-2 px-2 py-1 rounded-lg border"
+      className="flex text-sm items-center gap-2 px-2 py-1 rounded-lg border"
     >
       <ArrowLeft className="w-5 h-5" />
       رجوع
@@ -127,19 +127,19 @@ export default function ProductDetails() {
               
             )}
 
-            <h1 className="text-3xl md:text-5xl font-extrabold text-gray-900 mb-4 leading-tight">{product.name}</h1>
+            <h1 className="text-xl md:text-2xl font-extrabold text-gray-900 mb-4 leading-tight mt-2">{product.name}</h1>
             
-            <div className="flex items-center gap-2 mb-8 border-b border-gray-100 pb-6">
-              <span className="text-4xl font-black text-amber-500">{product.price}</span>
+            <div className="flex items-center gap-2 mb-6 border-b border-gray-100 pb-6">
+              <span className="text-lg md:text-xl font-black text-amber-500">{product.price}</span>
               <span className="text-xl font-bold text-gray-500 mt-2">ريال</span>
             </div>
             
             <div className="mb-10 flex-grow">
-              <h3 className="text-xl font-bold text-gray-800 mb-3 flex items-center gap-2">
+              <h3 className="text-base md:text-lg font-bold text-gray-800 mb-3 flex items-center gap-2">
                 <svg className="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 وصف المنتج
               </h3>
-              <p className="text-gray-600 leading-relaxed text-lg bg-gray-50 p-4 rounded-xl border border-gray-100">
+              <p className="text-gray-600 leading-relaxed text-sm md:text-base bg-gray-50 p-4 rounded-xl border border-gray-100">
                 {product.description || "لا يوجد وصف متاح لهذا المنتج حالياً. يُخبز بكل حب وعناية ليرضي ذائقتكم."}
               </p>
             </div>
@@ -183,7 +183,7 @@ export default function ProductDetails() {
                            toast.success(`${product.name} تم إضافته إلى السلة`);
                          }
                        }}
-                className="w-full flex items-center justify-center gap-3 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-bold py-4 rounded-xl shadow-lg transition-all duration-300 transform hover:-translate-y-1 hover:shadow-amber-500/30 active:scale-95 text-xl"
+                className="w-full flex items-center justify-center gap-3 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-bold py-4 rounded-xl shadow-lg transition-all duration-300 transform hover:-translate-y-1 hover:shadow-amber-500/30 active:scale-95 text-lg md:text-xl"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                 إضافة إلى السلة

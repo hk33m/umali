@@ -16,7 +16,7 @@ export default function Home() {
   
 
   return (
-    <main className="min-h-screen bg-background overflow-auto ">
+    <main className="min-h-screen bg-background overflow-hidden">
       <Header onCartClick={() => setIsCartOpen(true)} />
         {/* <HeroAnimation /> */}
       <FloatingContact />

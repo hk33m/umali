@@ -59,13 +59,13 @@ export default function Features() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <p className="text-primary font-cairo font-semibold text-lg mb-3">
+          <p className="text-primary font-cairo font-semibold text-sm mb-3">
             💎 لماذا تختار مخبز أم علي؟
           </p>
-          <h2 className="font-playfair font-bold text-4xl md:text-5xl text-foreground mb-4">
+          <h2 className="font-playfair font-bold text-2xl md:text-4xl text-foreground mb-4">
      مخبوزات طازجة كل يوم
           </h2>
-          <p className="text-muted-foreground font-cairo max-w-2xl mx-auto">
+          <p className="text-muted-foreground font-cairo max-w-2xl mx-auto text-sm md:text:base">
            نقدم لك أشهى المخبوزات والحلويات الطازجة بمكونات مختارة بعناية، وجودة تضمن لك مذاقًا لا يُنسى.
           </p>
         </motion.div>
@@ -96,12 +96,12 @@ export default function Features() {
                   }}
                   className="inline-flex items-center justify-center w-16 h-16 bg-primary/10 rounded-full mb-4"
                 >
-                  <Icon size={32} className="text-primary" />
+                  <Icon  className="text-primary w-7 h-7 md:w-8" />
                 </motion.div>
-                <h3 className="font-playfair font-bold text-lg text-foreground mb-3">
+                <h3 className="font-playfair font-bold text-base md:text-lg text-foreground mb-3">
                   {feature.title}
                 </h3>
-                <p className="text-muted-foreground font-cairo text-sm leading-relaxed">
+                <p className="text-muted-foreground font-cairo text-sm md:text-base leading-relaxed">
                   {feature.description}
                 </p>
               </motion.div>

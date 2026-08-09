@@ -38,7 +38,7 @@ export default function Header() {
                   <img src="/logo.jpg" alt="Logo" className="rounded-full" />
                 </span>
               </div>
-              <span className="font-playfair font-bold text-xl text-foreground hidden sm:inline">
+              <span className="font-playfair font-bold text-base md:text-lg text-foreground ">
                 مخبز أم علي
               </span>
             </div>
