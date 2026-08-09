@@ -483,7 +483,7 @@ export default function ProductManager() {
             animate={{ opacity: 1, y: 0 }}
             className="space-y-6"
           >
-            <div className="flex items-center gap-4">
+            <div className="flex items-start flex-col gap-4">
               <Button
                 variant="outline"
                 onClick={() => setCurrentView("list")}
@@ -492,7 +492,7 @@ export default function ProductManager() {
                 <ArrowRight size={18} /> العودة للقائمة
               </Button>
               <div>
-                <h1 className="text-3xl font-bold tracking-tight text-slate-900">
+                <h1 className="text-lg md:text-xl font-bold tracking-tight text-slate-900">
                   {editingId ? "تعديل المنتج" : "إضافة منتج جديد"}
                 </h1>
               </div>
