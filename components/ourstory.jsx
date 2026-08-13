@@ -2,7 +2,7 @@ import React from 'react';
 
 const OurStory = () => {
   return (
-    <section className="py-10 bg-orange-50/50" dir="rtl">
+    <section className="py-10 bg-orange-50/50" id={"story"} dir="rtl">
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="bg-white rounded-3xl p-8 md:p-12 shadow-xs border border-orange-100 relative overflow-hidden">
           

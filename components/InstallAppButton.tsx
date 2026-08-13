@@ -83,9 +83,9 @@ export default function InstallAppButton() {
     <button
       type="button"
       onClick={handleInstall}
-      className="inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition hover:opacity-90"
+      className="inline-flex items-center gap-2 rounded-xl bg-primary px-2 py-2 text-xs font-medium text-primary-foreground transition hover:opacity-90"
     >
-      <Download className="size-4" />
+      <Download className="size-3" />
       تثبيت التطبيق
     </button>
   );

@@ -1,15 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Facebook, Instagram, Twitter, Phone, Mail } from "lucide-react";
+import { Facebook, Instagram, Phone, Mail } from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
-    { icon: Facebook, href: "#", label: "Facebook" },
-    { icon: Instagram, href: "#", label: "Instagram" },
-    { icon: Twitter, href: "#", label: "Twitter" },
+    { icon: Instagram, href: "https://www.instagram.com/umali_bakery?igsh=aHUyNGJ3Yzd5OTNw", label: "Instagram" },
+    { icon: Facebook, href: "https://www.facebook.com/share/1DVCwRxaqs/", label: "Facebook" },
+  
   ];
 
   const footerLinks = [

@@ -63,7 +63,7 @@ export default function Hero() {
             >
               مخبز أم علي 
               <br />
-              <span className="text-primary"> نكهة البيت، في كل لقمة ❤️  </span>
+              <span className="text-primary"> نكهة البيت ، في كل لقمة ❤️  </span>
             </motion.h1>
 
             <motion.p
@@ -132,7 +132,7 @@ export default function Hero() {
           >
             <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/10 rounded-3xl"></div>
             <Image
-              src="/hero.png"
+              src="/hero.webp"
               alt="مخبز أم علي المميز"
               fill
               className="object-cover rounded-3xl shadow-2xl"

@@ -3,7 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 import { usePathname , useRouter} from 'next/navigation';
 
-import { Home, Package, Image as ImageIcon, Megaphone, Settings, LogOut, X } from 'lucide-react';
+import { Home, Package, Image as ImageIcon, Megaphone, Settings, LogOut, X , List } from 'lucide-react';
 
 const Sidebar = ({ closeSidebar }) => {
   const pathname = usePathname();
@@ -18,10 +18,11 @@ const handleLogout = () => {
 
   const menuItems = [
     { id: 1, title: 'الرئيسية', icon: Home, path: '/admin' },
-    { id: 2, title: 'المنتجات', icon: Package, path: '/admin/ProductManager' },
-    { id: 3, title: 'البنرات', icon: ImageIcon, path: '/admin/bannermanagement' },
-    { id: 4, title: 'الإعلانات', icon: Megaphone, path: '/admin/OfferManager' },
-    { id: 5, title: 'الإعدادات', icon: Settings, path: '/admin/' },
+    { id: 2, title: 'إدارة الطلبات', icon: List, path: '/admin/ordersStatus' },
+    { id: 3, title: 'المنتجات', icon: Package, path: '/admin/ProductManager' },
+    { id: 4, title: 'البنرات', icon: ImageIcon, path: '/admin/bannermanagement' },
+    { id: 5, title: 'الإعلانات', icon: Megaphone, path: '/admin/OfferManager' },
+    { id: 6, title: 'الإعدادات', icon: Settings, path: '/admin/' },
   ];
 
   return (
