@@ -62,7 +62,8 @@ export default function Header() {
 
       setDeferredPrompt(null);
       setIsInstallable(false);
-      if (typeof window !== "undefined") window.pwaDeferredPrompt = null;
+      if (typeof window !== "undefined")
+        (window as any).pwaDeferredPrompt = null;
     } catch (error) {
       console.error("خطأ أثناء التثبيت:", error);
     }
