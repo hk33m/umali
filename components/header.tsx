@@ -10,8 +10,54 @@ import Link from 'next/link';
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const cartItems = useCartStore((state) => state.cartItems);
-const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
   const cartCount = cartItems.length;
+
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const [isInstallable, setIsInstallable] = useState(false);
+
+  useEffect(() => {
+    // الاستماع إلى حدث قبل التثبيت
+    const handleBeforeInstallPrompt = (e) => {
+      // منع المتصفح من إظهار النافذة التلقائية
+      e.preventDefault();
+      // حفظ الحدث لاستخدامه لاحقاً عند النقر على الزر
+      setDeferredPrompt(e);
+      // تحديث الحالة لإظهار زر التثبيت
+      setIsInstallable(true);
+    };
+
+    window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+
+    // الاستماع إلى حدث اكتمال التثبيت لإخفاء الزر
+    window.addEventListener("appinstalled", () => {
+      setIsInstallable(false);
+      setDeferredPrompt(null);
+      console.log("تم تثبيت التطبيق بنجاح");
+    });
+
+    return () => {
+      window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+    };
+  }, []);
+
+  const handleInstallClick = async () => {
+  console.log("قيمة الحدث:", deferredPrompt); // للتحقق من الكونسول
+  
+  if (!deferredPrompt) {
+    alert("لم يتم التقاط حدث التثبيت. تأكد من أن الموقع يحقق شروط PWA.");
+    return;
+  }
+
+  try {
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    console.log(`نتيجة التثبيت: ${outcome}`);
+    setDeferredPrompt(null);
+    setIsInstallable(false);
+  } catch (error) {
+    console.error("حدث خطأ أثناء التثبيت:", error);
+  }
+};
 
   const navItems = [
     { name: "الرئيسية", href: "/" },
@@ -21,24 +67,7 @@ const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
     { name: "اتصل بنا", href: "/#contact" },
   ];
 
-  useEffect(() => {
-    const handler = (e: any) => {
-      e.preventDefault();
-      setDeferredPrompt(e);
-    };
-    window.addEventListener('beforeinstallprompt', handler);
-    return () => window.removeEventListener('beforeinstallprompt', handler);
-  }, []);
-
-  const handleInstall = () => {
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-    } else {
-      // إذا لم يكن الحدث متاحاً، نوجه المستخدم للنقر على القائمة
-      alert("للتثبيت، انقر على أيقونة الثلاث نقاط في المتصفح ثم اختر 'تثبيت التطبيق'");
-    }
-  };
-
+ 
   return (
     <header className="fixed top-0 w-full bg-background/30 backdrop-blur-md z-50 border-b border-border">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -91,7 +120,7 @@ const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
             >
               <Button 
               variant="outline" size="icon"
-               onClick={handleInstall} >
+               onClick={handleInstallClick} >
                 <Download className="w-6 h-6" />
             </Button>
     </motion.div>
