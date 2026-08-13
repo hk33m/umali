@@ -98,7 +98,7 @@ export default function Hero() {
             <motion.div variants={itemVariants} className="flex gap-8 pt-4">
               <div>
                 <p className="text-sm md:text-base font-bold text-primary2 font-playfair">
-                 🌾 بر صحي
+                  بر صحي 🌾
                 </p>
                 <p className="text-xs text-muted-foreground font-cairo">
                  مخبوزاتنا أساسها البر
@@ -106,7 +106,7 @@ export default function Hero() {
               </div>
               <div>
                 <p className="text-sm md:text-base font-bold text-primary2 font-playfair">
-                  ❤️ بأيدي أمهات
+                   بأيدي أمهات ❤️
                 </p>
                 <p className="text-xs text-muted-foreground font-cairo">
                 صُنعت بحب وعناية
@@ -114,7 +114,7 @@ export default function Hero() {
               </div>
               <div>
                 <p className="text-sm md:text-base font-bold text-primary2 font-playfair">
-                🔥 تُخبز يوميًا
+                 تُخبز يوميًا 🔥
                 </p>
                 <p className="text-xs text-muted-foreground font-cairo">
                 طازجة من الفرن
