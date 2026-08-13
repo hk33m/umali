@@ -1,63 +1,72 @@
 "use client";
 
-import { useState , useEffect} from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Menu, X, ShoppingCart,Download } from "lucide-react";
+import { Menu, X, ShoppingCart, Download } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
-import Link from 'next/link';
+import Link from "next/link";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const cartItems = useCartStore((state) => state.cartItems);
   const cartCount = cartItems.length;
 
-  const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const [deferredPrompt, setDeferredPrompt] = useState<any | null>(null);
   const [isInstallable, setIsInstallable] = useState(false);
 
   useEffect(() => {
-    // الاستماع إلى حدث قبل التثبيت
-    const handleBeforeInstallPrompt = (e) => {
-      // منع المتصفح من إظهار النافذة التلقائية
-      e.preventDefault();
-      // حفظ الحدث لاستخدامه لاحقاً عند النقر على الزر
-      setDeferredPrompt(e);
-      // تحديث الحالة لإظهار زر التثبيت
+    // 1. التحقق مما إذا كان الحدث قد تم التقاطه مسبقاً بواسطة السكريبت في layout
+    if (typeof window !== "undefined" && (window as any).pwaDeferredPrompt) {
+      setDeferredPrompt((window as any).pwaDeferredPrompt);
       setIsInstallable(true);
+    }
+
+    // 2. الاستماع للحدث في حال تم إطلاقه لاحقاً
+    const handlePromptReady = () => {
+      if ((window as any).pwaDeferredPrompt) {
+        setDeferredPrompt((window as any).pwaDeferredPrompt);
+        setIsInstallable(true);
+      }
     };
 
-    window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+    window.addEventListener("pwa-prompt-ready", handlePromptReady);
+    window.addEventListener("beforeinstallprompt", (e) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+      setIsInstallable(true);
+    });
 
-    // الاستماع إلى حدث اكتمال التثبيت لإخفاء الزر
     window.addEventListener("appinstalled", () => {
       setIsInstallable(false);
       setDeferredPrompt(null);
-      console.log("تم تثبيت التطبيق بنجاح");
+      if (typeof window !== "undefined")
+        (window as any).pwaDeferredPrompt = null;
     });
 
     return () => {
-      window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+      window.removeEventListener("pwa-prompt-ready", handlePromptReady);
     };
   }, []);
 
   const handleInstallClick = async () => {
-  console.log("قيمة الحدث:", deferredPrompt); // للتحقق من الكونسول
-  
-  if (!deferredPrompt) {
-    alert("لم يتم التقاط حدث التثبيت. تأكد من أن الموقع يحقق شروط PWA.");
-    return;
-  }
+    if (!deferredPrompt) {
+      alert("لم يتم التقاط الحدث حتى الآن. حاول تحديث الصفحة.");
+      return;
+    }
 
-  try {
-    deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
-    console.log(`نتيجة التثبيت: ${outcome}`);
-    setDeferredPrompt(null);
-    setIsInstallable(false);
-  } catch (error) {
-    console.error("حدث خطأ أثناء التثبيت:", error);
-  }
-};
+    try {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      console.log(`نتيجة التثبيت: ${outcome}`);
+
+      setDeferredPrompt(null);
+      setIsInstallable(false);
+      if (typeof window !== "undefined") window.pwaDeferredPrompt = null;
+    } catch (error) {
+      console.error("خطأ أثناء التثبيت:", error);
+    }
+  };
 
   const navItems = [
     { name: "الرئيسية", href: "/" },
@@ -67,7 +76,6 @@ export default function Header() {
     { name: "اتصل بنا", href: "/#contact" },
   ];
 
- 
   return (
     <header className="fixed top-0 w-full bg-background/30 backdrop-blur-md z-50 border-b border-border">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -107,24 +115,21 @@ export default function Header() {
             ))}
           </div>
 
-            
-              
-             
           {/* Action Buttons */}
           <div className="flex items-center gap-4">
-
-              <motion.div
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
-              <Button 
-              variant="outline" size="icon"
-               onClick={handleInstallClick} >
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={handleInstallClick}
+              >
                 <Download className="w-6 h-6" />
-            </Button>
-    </motion.div>
-
+              </Button>
+            </motion.div>
 
             <motion.div
               initial={{ opacity: 0 }}
@@ -132,27 +137,29 @@ export default function Header() {
               transition={{ duration: 0.5, delay: 0.3 }}
             >
               <Link href="/cart">
-              <Button
-              variant="outline" size="icon"
-                className="relative p-2 text-foreground hover:text-primary transition-colors cursor-pointer"
-              >
-                <ShoppingCart className="w-6 h-6" />
-                {cartCount > 0 && (
-                  <motion.span
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    className="absolute -top-1 -right-1 bg-accent text-accent-foreground text-xs font-bold rounded-full w-4 h-4 flex items-center justify-center"
-                  >
-                    {cartCount}
-                  </motion.span>
-                )}
-              </Button>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="relative p-2 text-foreground hover:text-primary transition-colors cursor-pointer"
+                >
+                  <ShoppingCart className="w-6 h-6" />
+                  {cartCount > 0 && (
+                    <motion.span
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      className="absolute -top-1 -right-1 bg-accent text-accent-foreground text-xs font-bold rounded-full w-4 h-4 flex items-center justify-center"
+                    >
+                      {cartCount}
+                    </motion.span>
+                  )}
+                </Button>
               </Link>
             </motion.div>
 
             {/* Mobile Menu Button */}
             <Button
-            variant="outline" size="icon"
+              variant="outline"
+              size="icon"
               onClick={() => setIsOpen(!isOpen)}
               className="md:hidden text-foreground hover:text-primary transition-colors"
             >
@@ -180,7 +187,7 @@ export default function Header() {
                   {item.name}
                 </a>
               ))}
-                   
+
               {/* <Button
                 onClick={() => {
                   setIsOpen(false);
@@ -190,7 +197,6 @@ export default function Header() {
                 <ShoppingCart className="w-4 h-4 ml-2" />
                 السلة ({cartCount})
               </Button> */}
-         
             </div>
           </motion.div>
         )}

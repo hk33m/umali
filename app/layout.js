@@ -28,6 +28,19 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body dir="rtl">
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.pwaDeferredPrompt = null;
+              window.addEventListener('beforeinstallprompt', (e) => {
+                e.preventDefault();
+                window.pwaDeferredPrompt = e;
+                // إطلاق حدث مخصص لإخبار React أن الحدث أصبح جاهزاً
+                window.dispatchEvent(new Event('pwa-prompt-ready'));
+              });
+            `,
+          }}
+        />
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
