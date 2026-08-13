@@ -7,8 +7,16 @@ import "./globals.css";
 export const metadata = {
   title: "مخبز أم علي المميز",
   description:
-    "منتجات مخبز أم علي المطبوخ الجاهز بجودة عالية مستوحى من الطبيعة والأطعمة الشرقية الأصيلة",
-  generator: "v0.app",
+    "منتجات مخبز أم علي بجودة عالية مستوحاة من الطبيعة والأطعمة الشرقية الأصيلة",
+
+  applicationName: "مخبز أم علي",
+
+  appleWebApp: {
+    capable: true,
+    title: "مخبز أم علي",
+    statusBarStyle: "default",
+  },
+
   icons: {
     icon: [
       {
@@ -26,21 +34,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body dir="rtl">
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.pwaDeferredPrompt = null;
-              window.addEventListener('beforeinstallprompt', (e) => {
-                e.preventDefault();
-                window.pwaDeferredPrompt = e;
-                // إطلاق حدث مخصص لإخبار React أن الحدث أصبح جاهزاً
-                window.dispatchEvent(new Event('pwa-prompt-ready'));
-              });
-            `,
-          }}
-        />
+    <html lang="ar" dir="rtl" suppressHydrationWarning>
+      <body>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
