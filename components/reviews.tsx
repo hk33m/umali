@@ -77,13 +77,13 @@ export default function Reviews() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-4"
         >
           <p className="text-primary font-cairo font-semibold text-sm mb-3">
             ⭐ آراء عملائنا
           </p>
           <h2 className="font-playfair font-bold text-2xl md:text-4xl text-foreground mb-4">
-            يثق بنا آلاف العملاء
+         كلامهم… يسعدنا ❤️
           </h2>
           <p className="text-muted-foreground font-cairo max-w-2xl mx-auto text-sm md:text-base">
             اقرأ ما يقوله عملاؤنا الراضون عن منتجاتنا الفاخرة
@@ -96,7 +96,7 @@ export default function Reviews() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
         >
           {reviews.map((review, index) => (
             <motion.div

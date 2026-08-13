@@ -78,17 +78,21 @@ export default function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-4"
         >
           <p className="text-primary font-cairo font-semibold text-sm mb-3">
             📞 تواصل معنا
           </p>
           <h2 className="font-playfair font-bold text-2xl md:text-4xl text-foreground mb-4">
-            نحن هنا لخدمتك
+          ننتظركم ❤️
           </h2>
           <p className="text-muted-foreground font-cairo max-w-2xl mx-auto text-sm md:text-base">
-            اتصل بنا أو أرسل لنا رسالة وسيرد عليك فريقنا في أقرب وقت ممكن
+سواء كنت تريد طلب مخبوزاتك المفضلة، أو لديك سؤال، يسعدنا أن نسمع منك.
+
           </p>
+          <p className="text-muted-foreground font-cairo max-w-2xl mx-auto text-sm md:text-base">
+أهلًا بك في أم علي… بيتك الثاني.
+</p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">

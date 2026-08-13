@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { toast } from "sonner";
-import { ShoppingCart, Plus, Minus,ArrowLeftFromLine } from "lucide-react";
+import { ShoppingCart, Plus, Minus,ArrowLeft } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
 import Link from "next/link";
 
@@ -89,7 +89,7 @@ export default function Products() {
   }
 
   return (
-    <section id="products" className="py-20 px-4 sm:px-6 lg:px-8 bg-background">
+    <section id="products" className="pt-10 px-4 sm:px-6 lg:px-8 bg-background">
       <div className="max-w-7xl mx-auto" dir="rtl">
         
         {/* الترويسة */}
@@ -100,15 +100,15 @@ export default function Products() {
           viewport={{ once: true }}
           className="text-center mb-2"
         >
-          <h2 className="text-2xl md:text-4xl font-bold mb-2">منتجاتنا المميزة</h2>
+          <h2 className="text-2xl md:text-4xl font-bold mb-2"> مخبوزات بطعم البيت 🥖</h2>
           <p className="text-muted-foreground text-sm md:text-base max-w-2xl mx-auto mb-2">
-            تشكيلة فاخرة من مخبز أم علي المطبوخ بأفضل الوصفات الشرقية الأصيلة
+           اختَر ما تحب… وكل لقمة تحمل لك شيئًا من نكهة البيت
           </p>
           <div className="text-left text-primary flex justify-end text-sm  " > 
             <Link href={"/products"}
-            className="flex px-2 py-4 rounded-lg border "
+            className="flex gap-0.5 items-center px-2 py-4 rounded-lg border "
              >تصفح جميع المنتجات 
-             <ArrowLeftFromLine className="w-4 h-4" />
+             <ArrowLeft className="w-4 h-4" />
              </Link>
           </div>
         </motion.div>
@@ -128,6 +128,7 @@ export default function Products() {
                 variants={itemVariants}
                 className="group h-full flex flex-col"
               >
+                
                 <div className="relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col h-full border border-border">
                   
                   {/* شارة المنتج (Badge) */}
@@ -140,6 +141,7 @@ export default function Products() {
                   )}
 
                   {/* صورة المنتج */}
+                  <Link href={`/products/${product.id}`} className="flex-1">
                   <div className="relative w-full h-64 overflow-hidden bg-muted">
                     <img
                       src={`${process.env.NEXT_PUBLIC_IMAGE_URL}uploads/products/${product.image}`}
@@ -148,6 +150,7 @@ export default function Products() {
                       loading="lazy"
                     />
                   </div>
+                  </Link>
 
                   {/* تفاصيل المنتج */}
                   <div className="p-6 flex flex-col flex-grow">
@@ -220,6 +223,7 @@ export default function Products() {
                     </div>
                   </div>
                 </div>
+               
               </motion.div>
             ))
            

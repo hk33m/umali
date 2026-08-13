@@ -6,6 +6,7 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { toast } from "sonner";
 import { ArrowRight ,ArrowLeft} from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton"
 
 
 export default function ProductDetails() {
@@ -49,9 +50,69 @@ export default function ProductDetails() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-xl font-bold text-amber-500 animate-pulse">جاري تحميل أشهى المنتجات...</div>
+      <div>
+        <Header></Header>
+     <div className="min-h-screen bg-gray-50 py-10 px-4 md:px-10 font-sans text-gray-800 mt-16" dir="rtl">
+      <div className="container mx-auto max-w-6xl">
+        
+        {/* بطاقة المنتج الأساسية */}
+        <div className="flex flex-col md:flex-row gap-10 bg-white rounded-3xl shadow-xl border border-gray-100 p-6 md:p-10">
+          
+          {/* ================= قسم الصور Skeleton ================= */}
+          <div className="w-full md:w-1/2 flex flex-col items-center">
+            {/* الصورة الكبيرة المحددة */}
+            <Skeleton className="w-full h-80 md:h-[450px] rounded-2xl mb-6" />
+
+            {/* معرض الصور الفرعية (Thumbnails) */}
+            <div className="flex gap-4 overflow-x-auto p-2 w-full justify-center">
+              {[1, 2, 3, 4].map((i) => (
+                <Skeleton key={i} className="flex-shrink-0 w-20 h-20 md:w-24 md:h-24 rounded-xl" />
+              ))}
+            </div>
+          </div>
+
+          {/* ================= قسم تفاصيل المنتج Skeleton ================= */}
+          <div className="w-full md:w-1/2 flex flex-col justify-start py-4">
+            
+            {/* شارة التوفر وزر الرجوع */}
+            <div className="flex justify-between items-center mb-4">
+              <Skeleton className="h-6 w-28 rounded-full" />
+              <Skeleton className="h-9 w-20 rounded-lg" />
+            </div>
+
+            {/* اسم المنتج */}
+            <Skeleton className="h-8 w-3/4 rounded-lg mb-4" />
+            
+            {/* السعر */}
+            <div className="flex items-center gap-2 mb-6 border-b border-gray-100 pb-6">
+              <Skeleton className="h-7 w-24 rounded-md" />
+            </div>
+            
+            {/* الوصف */}
+            <div className="mb-10 flex-grow space-y-3">
+              <Skeleton className="h-6 w-32 rounded-md mb-2" />
+              <Skeleton className="h-20 w-full rounded-xl" />
+            </div>
+
+            {/* ================= قسم الكمية وإضافة للسلة Skeleton ================= */}
+            <div className="bg-white p-4 rounded-2xl shadow-[0_0_20px_rgba(0,0,0,0.05)] border border-gray-100 space-y-6">
+              
+              <div className="flex items-center justify-between">
+                <Skeleton className="h-6 w-16 rounded-md" />
+                <Skeleton className="h-12 w-36 rounded-xl" />
+              </div>
+
+              {/* زر الإضافة للسلة */}
+              <Skeleton className="w-full h-14 rounded-xl" />
+            </div>
+
+          </div>
+        </div>
+
       </div>
+    </div>
+    <Footer></Footer>
+    </div>
     );
   }
 

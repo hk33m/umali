@@ -33,7 +33,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="min-h-screen pt-30 pb-10 relative overflow-hidden bg-background"
+      className="min-h-screen pt-12 pb-5 shadow-xs  relative overflow-hidden bg-background/30 "
     >
       {/* Decorative Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
@@ -54,25 +54,23 @@ export default function Hero() {
               variants={itemVariants}
               className="text-primary font-cairo text-sm md:text-base font-semibold"
             >
-              ✨ طازجة تُخبز بحب كل يوم
+             🌾 من البر الصحي… وبأيدي أمهات
             </motion.p>
 
             <motion.h1
               variants={itemVariants}
               className="font-playfair font-bold text-2xl md:text-4xl text-foreground leading-tight"
             >
-              مخبز أم علي المميز
+              مخبز أم علي 
               <br />
-              <span className="text-primary"> طراوة مثالية وطعم أصيل</span>
+              <span className="text-primary"> نكهة البيت، في كل لقمة ❤️  </span>
             </motion.h1>
 
             <motion.p
               variants={itemVariants}
               className="text-sm md:text-base text-muted-foreground font-cairo leading-relaxed"
             >
-              أرغفة خبز أم علي تُحضر يومياً من أجود أنواع الدقيق والمكونات
-              الطبيعية لتضمن لك خبزاً خفيفاً وطرياً. الخيار الأمثل ليرافق جميع
-              وجباتك على المائدة.
+             مخبوزاتنا تُحضّر من البر الصحي بدل الدقيق الأبيض، وتُخبز بأيدي أمهات يضعن في كل رغيف شيئًا من حب البيت ودفء المائدة.
             </motion.p>
 
             <motion.div
@@ -88,37 +86,38 @@ export default function Hero() {
               </Button>
               <Button
                 size="lg"
+                asChild
                 variant="outline"
                 className="border-primary text-primary hover:bg-primary/5 font-cairo text-base h-12"
               >
-                اعرف المزيد
+               <a href="#contact"> اعرف المزيد</a>
               </Button>
             </motion.div>
 
             {/* Stats */}
             <motion.div variants={itemVariants} className="flex gap-8 pt-4">
               <div>
-                <p className="text-xl md:text-2xl font-bold text-primary2 font-playfair">
-                  2k+
+                <p className="text-sm md:text-base font-bold text-primary2 font-playfair">
+                 🌾 بر صحي
                 </p>
-                <p className="text-sm text-muted-foreground font-cairo">
-                  عميل راضٍ
-                </p>
-              </div>
-              <div>
-                <p className="text-xl md:text-2xl font-bold text-primary2 font-playfair">
-                  5★
-                </p>
-                <p className="text-sm text-muted-foreground font-cairo">
-                  تقييم مميز
+                <p className="text-xs text-muted-foreground font-cairo">
+                 مخبوزاتنا أساسها البر
                 </p>
               </div>
               <div>
-                <p className="text-xl md:text-2xl font-bold text-primary2 font-playfair">
-                  100%
+                <p className="text-sm md:text-base font-bold text-primary2 font-playfair">
+                  ❤️ بأيدي أمهات
                 </p>
-                <p className="text-sm text-muted-foreground font-cairo">
-                  طبيعي
+                <p className="text-xs text-muted-foreground font-cairo">
+                صُنعت بحب وعناية
+                </p>
+              </div>
+              <div>
+                <p className="text-sm md:text-base font-bold text-primary2 font-playfair">
+                🔥 تُخبز يوميًا
+                </p>
+                <p className="text-xs text-muted-foreground font-cairo">
+                طازجة من الفرن
                 </p>
               </div>
             </motion.div>
@@ -147,7 +146,8 @@ export default function Hero() {
               className="absolute -bottom-4 -left-4 bg-card rounded-2xl p-4 shadow-xl border border-border w-48"
             >
               <p className="font-cairo text-sm text-foreground font-semibold">
-                مكونات طازجة 100%
+             لذّة تُخبز يوميًا
+             🍞
               </p>
               <div className="flex gap-2 mt-2">
                 <div className="w-8 h-8 bg-primary/20 rounded-full"></div>

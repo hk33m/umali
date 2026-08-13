@@ -5,7 +5,7 @@ import { CartProvider } from "@/providers/cart-provider";
 import "./globals.css";
 
 export const metadata = {
-  title: "مخبز أم علي المميز - Waraq Al Ainab",
+  title: "مخبز أم علي المميز",
   description:
     "منتجات مخبز أم علي المطبوخ الجاهز بجودة عالية مستوحى من الطبيعة والأطعمة الشرقية الأصيلة",
   generator: "v0.app",

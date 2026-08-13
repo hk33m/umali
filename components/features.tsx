@@ -1,30 +1,30 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Croissant, Wheat, ChefHat, Truck } from "lucide-react";
+import { Home, Wheat, ChefHat, Flame } from "lucide-react";
 
 export default function Features() {
   const features = [
     {
-      icon: Croissant,
-      title: " طازج يوميًا",
-      description:
-       " نخبز جميع منتجاتنا يوميًا لتصلك بأفضل نكهة وجودة في كل طلب.",
-    },
-    {
       icon: Wheat,
-      title: "مكونات مختارة ",
-      description: "نستخدم أجود أنواع الدقيق والزبدة والمكونات الطبيعية للحصول على مذاق أصيل. ",
+      title: " البر الصحي ",
+      description:
+       "نختار البر الصحي بدل الدقيق الأبيض، لنقدم لك مخبوزات بطعم أصيل وخيار أقرب لما تحبه",
     },
     {
       icon: ChefHat,
-      title: " صنع بحرفية  ",
-      description: " حضَّر كل منتج بعناية وفق وصفات مجربة تمنحك الجودة في كل لقمة.",
+      title: "بأيدي أمهات  ",
+      description:"كل قطعة تُحضّر بعناية بأيدي أمهات يعرفن معنى أن يكون الطعام مصنوعًا بحب.",
     },
     {
-      icon: Truck,
-      title: "توصيل سريع  ",
-      description: "  نوصل طلباتك بسرعة مع تغليف يحافظ على الطزاجة حتى وصولها إليك.",
+      icon: Home,
+      title: " نكهة البيت   ",
+      description: "وصفات بطابع منزلي… لأننا نؤمن أن أجمل طعم هو الذي يشبه طعم البيت.",
+    },
+    {
+      icon: Flame,
+      title: "طازج كل يوم   ",
+      description: "نخبز يوميًا لتصل إليك المخبوزات طازجة، طرية، وبأجمل نكهة.",
     },
     
   ];
@@ -57,16 +57,16 @@ export default function Features() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-10"
         >
           <p className="text-primary font-cairo font-semibold text-sm mb-3">
             💎 لماذا تختار مخبز أم علي؟
           </p>
           <h2 className="font-playfair font-bold text-2xl md:text-4xl text-foreground mb-4">
-     مخبوزات طازجة كل يوم
+   لأننا لا نريد أن نقدم لك مجرد مخبوزات
           </h2>
           <p className="text-muted-foreground font-cairo max-w-2xl mx-auto text-sm md:text:base">
-           نقدم لك أشهى المخبوزات والحلويات الطازجة بمكونات مختارة بعناية، وجودة تضمن لك مذاقًا لا يُنسى.
+نريد أن نقدم لك الطعم الذي يذكّرك بالبيت
           </p>
         </motion.div>
 

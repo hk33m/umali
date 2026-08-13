@@ -44,8 +44,8 @@ export default function BannerSlider() {
   if (loading) {
     // هيكل تحميل وهمي (Skeleton) أثناء جلب البيانات
     return (
-      <div className="w-full max-w-6xl mx-auto px-4 mt-8">
-        <div className="w-full h-[250px] md:h-[400px] bg-gray-200 animate-pulse rounded-2xl"></div>
+      <div className="w-full max-w-6xl mx-auto px-4 mt-20">
+        <div className="w-full  bg-gray-200 animate-pulse rounded-2xl"></div>
       </div>
     );
   }
@@ -55,7 +55,7 @@ export default function BannerSlider() {
   }
 
   return (
-    <div className="w-full max-w-6xl mx-auto px-4 mt-8 mb-12" dir="rtl">
+    <div className="w-full max-w-6xl mx-auto px-4 mt-19 py-4 shadow-xs " dir="rtl">
       <Carousel
         plugins={[plugin.current]}
         className="w-full relative group"

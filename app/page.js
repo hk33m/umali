@@ -12,6 +12,7 @@ import Footer from '@/components/footer'
 import BannerSlider from '@/components/bannerSlider'
 import Offers from '@/components/offers';
 import FloatingContact from '@/components/floating-contact';
+import OurStory from '@/components/ourstory';
 export default function Home() {
   
 
@@ -20,11 +21,12 @@ export default function Home() {
       <Header onCartClick={() => setIsCartOpen(true)} />
         {/* <HeroAnimation /> */}
       <FloatingContact />
-      <Hero />
       <BannerSlider/>
+      <Hero />
       <Products />
       <Offers />
       <Features />
+      <OurStory />
       <Reviews />
       <Contact />
       <Footer />

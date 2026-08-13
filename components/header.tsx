@@ -1,16 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useState , useEffect} from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Menu, X, ShoppingCart } from "lucide-react";
+import { Menu, X, ShoppingCart,Download } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
 import Link from 'next/link';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const cartItems = useCartStore((state) => state.cartItems);
-
+const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
   const cartCount = cartItems.length;
 
   const navItems = [
@@ -20,6 +20,24 @@ export default function Header() {
     { name: "الآراء", href: "/#reviews" },
     { name: "اتصل بنا", href: "/#contact" },
   ];
+
+  useEffect(() => {
+    const handler = (e: any) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+    };
+    window.addEventListener('beforeinstallprompt', handler);
+    return () => window.removeEventListener('beforeinstallprompt', handler);
+  }, []);
+
+  const handleInstall = () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+    } else {
+      // إذا لم يكن الحدث متاحاً، نوجه المستخدم للنقر على القائمة
+      alert("للتثبيت، انقر على أيقونة الثلاث نقاط في المتصفح ثم اختر 'تثبيت التطبيق'");
+    }
+  };
 
   return (
     <header className="fixed top-0 w-full bg-background/30 backdrop-blur-md z-50 border-b border-border">
@@ -60,15 +78,33 @@ export default function Header() {
             ))}
           </div>
 
+            
+              
+             
           {/* Action Buttons */}
           <div className="flex items-center gap-4">
+
+              <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+            >
+              <Button 
+              variant="outline" size="icon"
+               onClick={handleInstall} >
+                <Download className="w-6 h-6" />
+            </Button>
+    </motion.div>
+
+
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
               <Link href="/cart">
-              <button
+              <Button
+              variant="outline" size="icon"
                 className="relative p-2 text-foreground hover:text-primary transition-colors cursor-pointer"
               >
                 <ShoppingCart className="w-6 h-6" />
@@ -76,22 +112,23 @@ export default function Header() {
                   <motion.span
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
-                    className="absolute -top-1 -right-1 bg-accent text-accent-foreground text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center"
+                    className="absolute -top-1 -right-1 bg-accent text-accent-foreground text-xs font-bold rounded-full w-4 h-4 flex items-center justify-center"
                   >
                     {cartCount}
                   </motion.span>
                 )}
-              </button>
+              </Button>
               </Link>
             </motion.div>
 
             {/* Mobile Menu Button */}
-            <button
+            <Button
+            variant="outline" size="icon"
               onClick={() => setIsOpen(!isOpen)}
               className="md:hidden text-foreground hover:text-primary transition-colors"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+            </Button>
           </div>
         </div>
 
