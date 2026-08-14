@@ -63,8 +63,7 @@ export default function Footer() {
                 </span>
               </div>
               <p className="text-background/70 font-cairo text-sm md:text-base leading-relaxed mb-4">
-                منتجات مخبز أم علي الفاخرة مصنوعة بأفضل المكونات الطبيعية
-                وتقاليد الطبخ الشرقي الأصيلة.
+               نكهة أصيلة، مكونات مختارة، ومخبوزات تُحضّر بحب كل يوم.
               </p>
               <div className="flex gap-4">
                 {socialLinks.map((social, index) => {

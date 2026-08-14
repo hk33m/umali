@@ -96,7 +96,7 @@ export default function Offers() {
               {/* تفاصيل العرض */}
               <div className="p-6 flex-1 flex flex-col justify-between">
                 <div>
-                  <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-amber-600 transition-colors">
+                  <h3 className="text-sm md:text-base font-bold text-slate-900 mb-3 group-hover:text-amber-600 transition-colors">
                     {offer.title}
                   </h3>
 

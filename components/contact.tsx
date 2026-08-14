@@ -137,8 +137,8 @@ export default function Contact() {
                 ساعات العمل
               </h4>
               <div className="space-y-2 font-cairo text-muted-foreground">
-                <p>السبت - الخميس: 8:00 ص - 10:00 م</p>
-                <p>الجمعة: 2:00 م - 10:00 م</p>
+                <p>السبت - الجمعة: 6:00 ص - 1:00 م</p>
+                <p>استعداد تام  لتغطية العزايم والمناسبات</p>
                 {/* <p>الأحد: مغلق</p> */}
               </div>
             </div>

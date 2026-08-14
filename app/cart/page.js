@@ -147,10 +147,10 @@ export default function CartPage() {
                   <span>المجموع الفرعي:</span>
                   <span className="font-semibold text-gray-900">{totalPrice} ريال</span>
                 </div>
-                <div className="flex justify-between items-center text-gray-600">
+                {/* <div className="flex justify-between items-center text-gray-600">
                   <span>رسوم التوصيل:</span>
                   <span className="font-bold text-green-500 bg-green-50 px-2 py-1 rounded">مجاني</span>
-                </div>
+                </div> */}
                 
                 <hr className="border-gray-100 my-4" />
                 

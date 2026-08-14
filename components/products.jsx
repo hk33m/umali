@@ -1,32 +1,61 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
 import { toast } from "sonner";
-import { ShoppingCart, Plus, Minus,ArrowLeft } from "lucide-react";
+import {
+  ShoppingCart,
+  Plus,
+  Minus,
+  ArrowLeft,
+  Grid2X2,
+  Square,
+  Star,
+  Heart,
+} from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
 import Link from "next/link";
-
 
 export default function Products() {
   const addToCart = useCartStore((state) => state.addToCart);
   const cartItems = useCartStore((state) => state.cartItems);
-  
-  // تعديل: تهيئة المتغير بمصفوفة فارغة لتجنب أخطاء الـ length
-  const [productsList, setProductsList] = useState([]); 
+
+  const [productsList, setProductsList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  // grid = منتجان / 3 منتجات
+  // single = منتج واحد
+  const [viewMode, setViewMode] = useState("single");
+
+  useEffect(() => {
+    const savedView = localStorage.getItem("products-view-mode");
+
+    if (savedView === "single" || savedView === "grid") {
+      setViewMode(savedView);
+    }
+  }, []);
+
+  const changeViewMode = (mode) => {
+    setViewMode(mode);
+    localStorage.setItem("products-view-mode", mode);
+  };
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`);
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/products`
+        );
+
         const result = await response.json();
 
         if (result.success) {
           setProductsList(
-            result.data.map((product) => ({ ...product, quantity: 1 }))
+            result.data.map((product) => ({
+              ...product,
+              quantity: 1,
+            }))
           );
         }
       } catch (error) {
@@ -43,7 +72,10 @@ export default function Products() {
     setProductsList((prev) =>
       prev.map((product) =>
         product.id === id
-          ? { ...product, quantity: product.quantity + 1 }
+          ? {
+              ...product,
+              quantity: product.quantity + 1,
+            }
           : product
       )
     );
@@ -53,198 +85,433 @@ export default function Products() {
     setProductsList((prev) =>
       prev.map((product) =>
         product.id === id
-          ? { ...product, quantity: product.quantity > 1 ? product.quantity - 1 : 1 }
+          ? {
+              ...product,
+              quantity:
+                product.quantity > 1 ? product.quantity - 1 : 1,
+            }
           : product
       )
     );
   };
 
+  const addProductToCart = (product) => {
+    const existingItem = cartItems.find(
+      (item) => item.id === product.id
+    );
+
+    if (existingItem) {
+      toast.info(`${product.name} موجود بالفعل في السلة`);
+      return;
+    }
+
+    addToCart(product);
+
+    toast.success(`تم إضافة ${product.name} إلى السلة`, {
+      description: "استمتع بأشهى مخبوزات أم علي ❤️",
+    });
+  };
+
   const containerVariants = {
-    hidden: { opacity: 0 },
+    hidden: {
+      opacity: 0,
+    },
+
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
+        staggerChildren: 0.08,
+        delayChildren: 0.1,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: {
+      opacity: 0,
+      y: 20,
+    },
+
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5 },
+      transition: {
+        duration: 0.45,
+      },
     },
   };
 
   if (isLoading) {
     return (
-      <div className="flex flex-col justify-center items-center h-[70vh]">
-        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-orange-500 mb-4"></div>
-        <p className="text-gray-500 font-medium">جاري تحضير أشهى المأكولات...</p>
-      </div>
+      <section className="flex min-h-[70vh] items-center justify-center bg-background">
+        <div className="flex flex-col items-center">
+          <div className="mb-5 h-12 w-12 animate-spin rounded-full border-4 border-primary/20 border-t-primary" />
+
+          <p className="text-sm font-medium text-muted-foreground">
+            جاري تحضير أشهى المخبوزات...
+          </p>
+        </div>
+      </section>
     );
   }
 
   return (
-    <section id="products" className="pt-10 px-4 sm:px-6 lg:px-8 bg-background">
-      <div className="max-w-7xl mx-auto" dir="rtl">
-        
-        {/* الترويسة */}
+    <section
+      id="products"
+      className="relative overflow-hidden bg-background px-4 py-12 sm:px-6 lg:px-8"
+    >
+      {/* لمسات خلفية */}
+      <div className="pointer-events-none absolute -right-32 top-20 h-72 w-72 rounded-full bg-[#E09F3E]/10 blur-3xl" />
+
+      <div className="pointer-events-none absolute -left-32 bottom-20 h-72 w-72 rounded-full bg-[#4A2C11]/5 blur-3xl" />
+
+      <div
+        className="relative mx-auto max-w-7xl"
+        dir="rtl"
+      >
+        {/* ================= HEADER ================= */}
+
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mb-2"
+          initial={{
+            opacity: 0,
+            y: -20,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          transition={{
+            duration: 0.6,
+          }}
+          viewport={{
+            once: true,
+          }}
+          className="mb-8"
         >
-          <h2 className="text-2xl md:text-4xl font-bold mb-2"> مخبوزات بطعم البيت 🥖</h2>
-          <p className="text-muted-foreground text-sm md:text-base max-w-2xl mx-auto mb-2">
-           اختَر ما تحب… وكل لقمة تحمل لك شيئًا من نكهة البيت
-          </p>
-          <div className="text-left text-primary flex justify-end text-sm  " > 
-            <Link href={"/products"}
-            className="flex gap-0.5 items-center px-2 py-4 rounded-lg border "
-             >تصفح جميع المنتجات 
-             <ArrowLeft className="w-4 h-4" />
-             </Link>
+          <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+            {/* العنوان */}
+
+            <div className="text-center">
+              
+
+              <h2 className="text-2xl font-black tracking-tight text-foreground sm:text-3xl md:text-4xl">
+                مخبوزات بطعم البيت
+                <span className="mr-2">🥖</span>
+              </h2>
+
+              <p className="mt-2 max-w-xl text-sm leading-7 text-muted-foreground sm:text-base">
+                اختر ما تحب… وكل لقمة تحمل لك شيئًا من نكهة البيت
+              </p>
+            </div>
+
+            {/* الأزرار */}
+
+            <div className="flex items-center gap-2">
+              {/* تبديل العرض */}
+
+              <div className="flex items-center rounded-xl border border-border bg-background p-1 shadow-sm">
+                <button
+                  type="button"
+                  onClick={() => changeViewMode("grid")}
+                  className={`flex h-9 items-center gap-1.5 rounded-lg px-3 text-xs font-bold transition-all ${
+                    viewMode === "grid"
+                      ? "bg-primary text-white shadow-sm"
+                      : "text-muted-foreground hover:bg-muted"
+                  }`}
+                >
+                  <Grid2X2 className="h-4 w-4" />
+
+                  <span className="hidden sm:inline">
+                    منتجات
+                  </span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => changeViewMode("single")}
+                  className={`flex h-9 items-center gap-1.5 rounded-lg px-3 text-xs font-bold transition-all ${
+                    viewMode === "single"
+                      ? "bg-primary text-white shadow-sm"
+                      : "text-muted-foreground hover:bg-muted"
+                  }`}
+                >
+                  <Square className="h-4 w-4" />
+
+                  <span className="hidden sm:inline">
+                    منتج واحد
+                  </span>
+                </button>
+              </div>
+
+              <Link
+                href="/products"
+                className="flex h-11 items-center gap-1 rounded-xl border border-border bg-background px-3 text-xs font-bold text-primary transition-all hover:border-primary hover:bg-primary hover:text-white sm:px-4 sm:text-sm"
+              >
+                تصفح الكل
+
+                <ArrowLeft className="h-4 w-4" />
+              </Link>
+            </div>
           </div>
         </motion.div>
 
-        {/* شبكة المنتجات (تم تصحيح الأخطاء هنا) */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-        >
-          {productsList.length > 0 ? (
-            productsList.slice(0, 6).map((product) => (
+        {/* ================= PRODUCTS ================= */}
+
+        {productsList.length > 0 ? (
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{
+              once: true,
+              margin: "-100px",
+            }}
+            className={`grid gap-4 sm:gap-6 ${
+              viewMode === "single"
+                ? "grid-cols-1"
+                : "grid-cols-2 lg:grid-cols-3"
+            }`}
+          >
+            {productsList.slice(0, 6).map((product) => (
               <motion.div
                 key={product.id}
                 variants={itemVariants}
-                className="group h-full flex flex-col"
+                layout
+                className="group"
               >
-                
-                <div className="relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col h-full border border-border">
-                  
-                  {/* شارة المنتج (Badge) */}
-                  {product.badge_text && (
-                    <div className="absolute top-4 right-4 z-10">
-                      <span className="bg-accent text-accent-foreground px-4 py-2 rounded-full text-sm font-bold">
-                        {product.badge_text}
-                      </span>
-                    </div>
-                  )}
+                <div
+                  className={`relative flex h-full overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${
+                    viewMode === "single"
+                      ? "flex-col md:flex-row"
+                      : "flex-col"
+                  }`}
+                >
+                  {/* ================= IMAGE ================= */}
 
-                  {/* صورة المنتج */}
-                  <Link href={`/products/${product.id}`} className="flex-1">
-                  <div className="relative w-full h-64 overflow-hidden bg-muted">
+                  <div
+                    className={`relative overflow-hidden bg-muted ${
+                      viewMode === "single"
+                        ? "h-64 w-full md:h-auto md:min-h-[320px] md:w-[45%]"
+                        : "h-44 w-full sm:h-56"
+                    }`}
+                  >
+                    <Link
+                      href={`/products/${product.id}`}
+                      className="absolute inset-0 z-10"
+                    />
+
                     <img
                       src={`${process.env.NEXT_PUBLIC_IMAGE_URL}uploads/products/${product.image}`}
                       alt={product.name}
-                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                       loading="lazy"
                     />
-                  </div>
-                  </Link>
 
-                  {/* تفاصيل المنتج */}
-                  <div className="p-6 flex flex-col flex-grow">
-                    <div className="mb-3">
-                      <span className="text-xs font-semibold text-primary uppercase tracking-widest">
+                    {/* Gradient */}
+
+                    <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/50 to-transparent" />
+
+                    {/* Badge */}
+
+                    {product.badge_text && (
+                      <div className="absolute right-3 top-3 z-20">
+                        <span className="rounded-full bg-[#E09F3E] px-3 py-1.5 text-[10px] font-black text-[#4A2C11] shadow-lg sm:text-xs">
+                          {product.badge_text}
+                        </span>
+                      </div>
+                    )}
+
+                    {/* Favorite */}
+
+                    <button
+                      type="button"
+                      className="absolute left-3 top-3 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-primary shadow-md backdrop-blur transition-all hover:scale-110"
+                    >
+                      <Heart className="h-4 w-4" />
+                    </button>
+
+                    {/* نوع المنتج */}
+
+                    <div className="absolute bottom-3 right-3 z-20">
+                      <span className="rounded-lg bg-white/90 px-2.5 py-1 text-[10px] font-bold text-primary shadow-sm backdrop-blur sm:text-xs">
                         {product.product_type || "صنف مميز"}
                       </span>
                     </div>
+                  </div>
 
-                    <h3 className="text-base md:text-lg font-bold text-foreground mb-2">
-                      {product.name}
-                    </h3>
-                    <p className="text-gray-600 text-sm md:text-base mb-4 flex-grow">
-                      {product.description}
-                    </p>
+                  {/* ================= CONTENT ================= */}
 
-                    {/* التقييم */}
-                    <div className="flex items-center gap-2 mb-4">
-                      <div className="flex text-accent text-sm">
-                        {[...Array(5)].map((_, i) => (
-                          <span key={i} className="text-lg">
-                            {i < Math.floor(product.rating || 5) ? "★" : "☆"}
-                          </span>
-                        ))}
-                      </div>
-                      <span className="text-sm text-muted-foreground">
-                        ({product.reviews || 0})
-                      </span>
-                    </div>
+                  <div
+                    className={`flex flex-1 flex-col ${
+                      viewMode === "single"
+                        ? "p-5 sm:p-7 md:p-8"
+                        : "p-3.5 sm:p-5"
+                    }`}
+                  >
+                    {/* الاسم والوصف */}
 
-                    <div className="text-lg md:text-xl font-bold text-primary mb-6">
-                      {product.price} ريال
-                    </div>
-
-                    {/* أزرار الكمية والإضافة للسلة */}
-                    <div className="flex gap-3 mt-auto">
-                      <div className="flex items-center border border-border rounded-lg bg-gray-50">
-                        <button
-                          onClick={() => decreaseQuantity(product.id)}
-                          className="p-2 hover:bg-white rounded-md transition-colors text-gray-600"
+                    <div className="flex-1">
+                      <Link href={`/products/${product.id}`}>
+                        <h3
+                          className={`font-black leading-6 text-foreground transition-colors hover:text-primary ${
+                            viewMode === "single"
+                              ? "text-xl sm:text-2xl"
+                              : "text-sm sm:text-lg"
+                          }`}
                         >
-                          <Minus className="w-4 h-4" />
+                          {product.name}
+                        </h3>
+                      </Link>
+
+                      <p
+                        className={`mt-2 leading-6 text-muted-foreground ${
+                          viewMode === "single"
+                            ? "line-clamp-3 text-sm sm:text-base"
+                            : "line-clamp-2 text-xs sm:text-sm"
+                        }`}
+                      >
+                        {product.description}
+                      </p>
+
+                      {/* Rating */}
+
+                      <div className="mt-3 flex items-center gap-1.5">
+                        <div className="flex items-center">
+                          {[...Array(5)].map((_, i) => (
+                            <Star
+                              key={i}
+                              className={`h-3.5 w-3.5 sm:h-4 sm:w-4 ${
+                                i <
+                                Math.floor(product.rating || 5)
+                                  ? "fill-[#E09F3E] text-[#E09F3E]"
+                                  : "text-muted-foreground/30"
+                              }`}
+                            />
+                          ))}
+                        </div>
+
+                        <span className="text-[10px] text-muted-foreground sm:text-xs">
+                          ({product.reviews || 0})
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* ================= PRICE ================= */}
+
+                    <div className={`mt-4 flex ${viewMode === "single" ? "flex-row " : "flex-col "} md:flex-row items-center justify-between border-t border-border pt-4`}>
+                      <div>
+                        <span className="block text-[10px] text-muted-foreground sm:text-xs">
+                          السعر
+                        </span>
+
+                        <div className="mt-0.5 flex items-baseline gap-1">
+                          <span className="text-lg font-black text-primary sm:text-xl">
+                            {product.price}
+                          </span>
+
+                          <span className="text-[10px] font-bold text-muted-foreground sm:text-xs">
+                            ريال
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Quantity */}
+
+                      <div className="flex items-center rounded-lg border border-border bg-muted/40">
+                        <button
+                          type="button"
+                          onClick={() =>
+                            increaseQuantity(product.id)
+                          }
+                          className="flex h-8 w-8 items-center justify-center text-muted-foreground transition-colors hover:bg-background hover:text-primary sm:h-9 sm:w-9"
+                        >
+                          <Plus className="h-3.5 w-3.5" />
                         </button>
-                        <span className="px-4 py-2 font-bold text-gray-900 select-none">
+
+                        <span className="min-w-7 text-center text-xs font-black sm:text-sm">
                           {product.quantity}
                         </span>
+
                         <button
-                          onClick={() => increaseQuantity(product.id)}
-                          className="p-2 hover:bg-white rounded-md transition-colors text-gray-600"
+                          type="button"
+                          onClick={() =>
+                            decreaseQuantity(product.id)
+                          }
+                          className="flex h-8 w-8 items-center justify-center text-muted-foreground transition-colors hover:bg-background hover:text-primary sm:h-9 sm:w-9"
                         >
-                          <Plus className="w-4 h-4" />
+                          <Minus className="h-3.5 w-3.5" />
                         </button>
                       </div>
-
-                      <Button
-                        onClick={() => {
-                          const existingItem = cartItems.find((item) => item.id === product.id);
-                          if (existingItem) {
-                            toast.info(`${product.name} موجود بالفعل في السلة`);
-                          } else {
-                            addToCart(product);
-                            toast.success(`تم إضافة ${product.name} إلى السلة`);
-                          }
-                        }}
-                        className="flex-1 bg-primary hover:bg-primary/90 text-white font-bold py-2 rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
-                      >
-                        <ShoppingCart className="w-5 h-5" />
-                        أضف للسلة
-                      </Button>
                     </div>
+
+                    {/* ================= CART ================= */}
+
+                    <Button
+                      onClick={() =>
+                        addProductToCart(product)
+                      }
+                      className={`mt-3 w-full rounded-xl bg-primary font-bold text-white shadow-sm transition-all duration-300 hover:bg-primary/90 hover:shadow-md ${
+                        viewMode === "single"
+                          ? "h-12"
+                          : "h-10 sm:h-11"
+                      }`}
+                    >
+                      <ShoppingCart className="ml-1.5 h-4 w-4" />
+
+                      <span className="text-xs sm:text-sm">
+                        أضف للسلة
+                      </span>
+                    </Button>
                   </div>
                 </div>
-               
               </motion.div>
-            ))
-           
-          ) : (
-            <div className="col-span-1 md:col-span-2 lg:col-span-3 flex flex-col items-center justify-center py-16 bg-gray-50 rounded-2xl border border-dashed border-gray-200">
-              <ShoppingCart className="w-12 h-12 text-gray-300 mb-3" />
-              <p className="text-lg text-muted-foreground font-medium">لا توجد منتجات متاحة في الوقت الحالي. يرجى العودة لاحقًا.</p>
-            </div>
-          )}
-          {productsList.length > 1 && (
-            <div className="col-span-1 md:col-span-2 lg:col-span-3 flex justify-center mt-8">
-              <Link href="/products" className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary/90 transition-colors font-bold">
-                عرض المزيد من المنتجات
-              </Link>
-            </div>
-          )}
-        </motion.div>
+            ))}
+          </motion.div>
+        ) : (
+          /* ================= EMPTY ================= */
 
-        {/* عرض خاص */}
-        
+          <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-border bg-muted/30 py-20 text-center">
+            <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
+              <ShoppingCart className="h-7 w-7 text-primary" />
+            </div>
 
+            <p className="font-bold text-foreground">
+              لا توجد منتجات متاحة حاليًا
+            </p>
+
+            <p className="mt-1 text-sm text-muted-foreground">
+              يرجى العودة لاحقًا 🍞
+            </p>
+          </div>
+        )}
+
+        {/* ================= MORE ================= */}
+
+        {productsList.length > 6 && (
+          <motion.div
+            initial={{
+              opacity: 0,
+              y: 15,
+            }}
+            whileInView={{
+              opacity: 1,
+              y: 0,
+            }}
+            viewport={{
+              once: true,
+            }}
+            className="mt-10 flex justify-center"
+          >
+            <Link
+              href="/products"
+              className="group flex items-center gap-2 rounded-xl border border-primary/20 bg-primary/5 px-6 py-3 text-sm font-bold text-primary transition-all hover:bg-primary hover:text-white"
+            >
+              عرض جميع المنتجات
+
+              <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
+            </Link>
+          </motion.div>
+        )}
       </div>
     </section>
   );

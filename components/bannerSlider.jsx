@@ -56,6 +56,7 @@ export default function BannerSlider() {
 
   return (
     <div className="w-full max-w-6xl mx-auto px-4 mt-19 py-4 shadow-xs " dir="rtl">
+      {/* <marquee direction="right" scrollamount="5" className="w-full bg-[#4A2C11] py-2.5 text-sm font-medium text-white">✨ عرض خاص من مخبز أم علي — خصم 15% على جميع المخبوزات 🎁 استخدم الكود <span className="font-bold text-[#E09F3E]">UMALI15</span> ✨</marquee> */}
       <Carousel
         plugins={[plugin.current]}
         className="w-full relative group"
