@@ -4,12 +4,91 @@ import { Toaster } from "@/components/ui/sonner";
 import { CartProvider } from "@/providers/cart-provider";
 import "./globals.css";
 
+
 export const metadata = {
-  title: "مخبز أم علي المميز",
+  metadataBase: new URL("https://umalibakery.vercel.app"),
+
+  title: {
+    default: "مخبز أم علي | umalibakery  ",
+    template: "%s | مخبز أم علي",
+  },
+
   description:
-    "منتجات مخبز أم علي بجودة عالية مستوحاة من الطبيعة والأطعمة الشرقية الأصيلة",
+   " مخبوزاتنا تُحضّر من البر الصحي بدل الدقيق الأبيض، وتُخبز بأيدي أمهات يضعن في كل رغيف شيئًا من حب البيت ودفء المائدة.",
+  keywords: [
+    "مخبز أم علي",
+    "مخبز ام علي",
+    "مخبز أم علي إب",
+    "مخبز ام علي إب",
+    "مخبز في إب",
+    "مخابز إب",
+    "مخبوزات إب",
+    "حلويات إب",
+    "مخبوزات طازجة",
+    "حلويات طازجة",
+    "مخبوزات وحلويات",
+    "مخبز",
+    "حلويات",
+  ],
+
+  authors: [
+    {
+      name: "مخبز أم علي",
+    },
+  ],
+
+  creator: "مخبز أم علي",
+  publisher: "مخبز أم علي",
 
   applicationName: "مخبز أم علي",
+
+  category: "food",
+
+  alternates: {
+    canonical: "https://umalibakery.vercel.app",
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+
+  verification: {
+    google: "qnHPSCgzi3-qMeczL8xk98I8DyzALII2aAzPikQdMJw",
+  },
+
+  openGraph: {
+    type: "website",
+    locale: "ar_YE",
+    url: "https://umalibakery.vercel.app",
+    siteName: "مخبز أم علي",
+    title: "مخبز أم علي | umalibakery  ",
+    description:
+      "  مخبوزات أم علي المنزلية، تُخبز يوميًا بعناية وبأجود المكونات لتقدم لك مذاقًا طازجًا وأصيلًا.",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "مخبز أم علي",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "مخبز أم علي | umalibakery  ",
+    description:
+      "مخبز أم علي يقدم المخبوزات والحلويات الطازجة بأجود المكونات.",
+    images: ["/og-image.jpg"],
+  },
 
   appleWebApp: {
     capable: true,
@@ -21,14 +100,20 @@ export const metadata = {
     icon: [
       {
         url: "/favicon-32x32.png",
-        media: "(prefers-color-scheme: light)",
+        sizes: "32x32",
+        type: "image/png",
       },
       {
-        url: "/favicon-32x32.png",
-        media: "(prefers-color-scheme: dark)",
+        url: "/favicon-16x16.png",
+        sizes: "16x16",
+        type: "image/png",
       },
     ],
-    apple: "/apple-touch-icon.png",
+    apple: {
+      url: "/apple-touch-icon.png",
+      sizes: "180x180",
+      type: "image/png",
+    },
   },
 };
 
